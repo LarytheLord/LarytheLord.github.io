@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abid Khan's portfolio: GSoC 2026 contributor at NumFOCUS/scikit-bio, full-stack and AI/ML engineer, open-source builder, and CTO at Knight Medicare.">
+  <title>Abid Khan - Scientific Software, AI Systems, Open Source</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f4ec;
+      --paper: #fffdf7;
+      --panel: rgba(255, 253, 247, 0.82);
+      --panel-2: #f0eadf;
+      --ink: #161a22;
+      --muted: #596273;
+      --soft: #8790a0;
+      --line: rgba(22, 26, 34, 0.1);
+      --line-strong: rgba(22, 26, 34, 0.18);
+      --blue: #2257d6;
+      --cyan: #047c9b;
+      --green: #16803d;
+      --amber: #b86500;
+      --red: #c24b4b;
+      --radius: 22px;
+      --radius-sm: 14px;
+      --shadow: 0 24px 70px rgba(44, 37, 25, 0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(34, 87, 214, 0.14), transparent 32%),
+        radial-gradient(circle at 84% 10%, rgba(22, 128, 61, 0.11), transparent 30%),
+        linear-gradient(180deg, #fffdf7 0%, #f7f4ec 52%, #f2ede3 100%);
+      color: var(--muted);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(22, 26, 34, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 26, 34, 0.035) 1px, transparent 1px);
+      background-size: 76px 76px;
+      mask-image: radial-gradient(circle at 50% 12%, #000, transparent 78%);
+    }
+    a { color: var(--ink); text-decoration: none; transition: 0.2s ease; }
+    a:hover { color: var(--blue); }
+    h1, h2, h3 { color: var(--ink); line-height: 1.04; letter-spacing: -0.055em; }
+    .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .container { width: min(1180px, calc(100% - 44px)); margin: 0 auto; }
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 247, 0.78);
+      backdrop-filter: blur(22px);
+    }
+    .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .mark { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; }
+    .mark-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 7px rgba(22, 128, 61, 0.1); }
+    .nav-links { display: flex; align-items: center; justify-content: flex-end; gap: 4px; flex-wrap: wrap; }
+    .nav-link { color: var(--muted); font: 700 0.72rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 11px; border-radius: 999px; }
+    .nav-link:hover { background: rgba(34, 87, 214, 0.08); color: var(--blue); }
+    .hero { padding: 138px 0 70px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) 380px; gap: 34px; align-items: end; }
+    .eyebrow { color: var(--blue); font: 800 0.72rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(3rem, 8vw, 7.2rem); max-width: 870px; }
+    .hero h1 .serif { color: var(--amber); font-style: italic; letter-spacing: -0.025em; }
+    .lead { max-width: 760px; margin-top: 24px; color: #3f4858; font-size: clamp(1.02rem, 2vw, 1.22rem); }
+    .artifact-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .artifact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(22, 26, 34, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.78);
+      box-shadow: 0 8px 24px rgba(44, 37, 25, 0.06);
+      color: #3c4557;
+      font: 700 0.72rem 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .artifact i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 5px rgba(34, 87, 214, 0.08); }
+    .artifact:nth-child(2) i { background: var(--green); box-shadow: 0 0 0 5px rgba(22, 128, 61, 0.08); }
+    .artifact:nth-child(3) i { background: var(--amber); box-shadow: 0 0 0 5px rgba(184, 101, 0, 0.08); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; border: 1px solid var(--line-strong); border-radius: 999px; font-weight: 800; font-size: 0.86rem; }
+    .btn-primary { background: var(--ink); color: #fffdf7; border-color: var(--ink); box-shadow: 0 12px 28px rgba(22, 26, 34, 0.16); }
+    .btn-primary:hover { background: var(--blue); color: #fff; border-color: var(--blue); transform: translateY(-1px); }
+    .btn-secondary { color: var(--ink); background: rgba(255, 253, 247, 0.82); }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+    .console {
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(248, 244, 234, 0.92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .console-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 15px; border-bottom: 1px solid var(--line); background: rgba(22, 26, 34, 0.035); }
+    .lights { display: flex; gap: 7px; }
+    .light { width: 9px; height: 9px; border-radius: 50%; background: var(--soft); }
+    .light:nth-child(1) { background: var(--red); } .light:nth-child(2) { background: var(--amber); } .light:nth-child(3) { background: var(--green); }
+    .console-title { color: var(--soft); font-size: 0.7rem; }
+    .console-body { padding: 18px; display: grid; gap: 12px; }
+    .log { display: grid; grid-template-columns: 94px 1fr; gap: 12px; font: 500 0.78rem 'JetBrains Mono', monospace; }
+    .log span:first-child { color: var(--soft); }
+    .log span:last-child { color: #273142; }
+    .proof-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: 46px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--line); }
+    .proof { padding: 20px; background: rgba(255, 253, 247, 0.9); min-height: 132px; position: relative; }
+    .proof::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, var(--blue), var(--green)); opacity: 0.72; }
+    .proof strong { display: block; color: var(--ink); font-size: 1.1rem; line-height: 1.1; letter-spacing: -0.04em; }
+    .proof span { display: block; margin-top: 10px; color: var(--soft); font: 700 0.68rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-top { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 30px; margin-bottom: 34px; align-items: start; }
+    .section-no { color: var(--soft); font: 800 0.75rem 'JetBrains Mono', monospace; letter-spacing: 0.16em; text-transform: uppercase; }
+    .section-title { font-size: clamp(2.1rem, 4.4vw, 4.35rem); max-width: 900px; }
+    .section-copy { max-width: 740px; margin-top: 14px; color: var(--muted); font-size: 1rem; }
+    .theme-note {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 12px;
+      align-items: start;
+      max-width: 720px;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(34, 87, 214, 0.14);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(34, 87, 214, 0.055), rgba(22, 128, 61, 0.045));
+      color: #465166;
+      font-size: 0.9rem;
+    }
+    .theme-note::before { content: ''; width: 10px; height: 10px; margin-top: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 7px rgba(22, 128, 61, 0.08); }
+    .case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .case {
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(246, 241, 230, 0.94));
+      padding: 24px;
+      box-shadow: 0 18px 55px rgba(44, 37, 25, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .case::after { content: ''; position: absolute; width: 170px; height: 170px; right: -75px; top: -75px; border-radius: 50%; background: radial-gradient(circle, rgba(34, 87, 214, 0.12), transparent 66%); pointer-events: none; }
+    .case.featured { grid-column: span 2; background: radial-gradient(circle at 13% 0%, rgba(34, 87, 214, 0.12), transparent 36%), linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(244, 238, 226, 0.96)); }
+    .case-kicker { color: var(--amber); font: 800 0.7rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.13em; margin-bottom: 16px; }
+    .case h3 { font-size: clamp(1.6rem, 3vw, 3rem); margin-bottom: 14px; }
+    .system-line { display: flex; align-items: center; gap: 8px; margin: 18px 0 0; color: var(--soft); font: 700 0.68rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .system-line::before, .system-line::after { content: ''; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, rgba(22, 26, 34, 0.16)); }
+    .system-line::after { background: linear-gradient(90deg, rgba(22, 26, 34, 0.16), transparent); }
+    .case p { color: #4c5668; font-size: 0.95rem; }
+    .case-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 22px 0; background: var(--line); }
+    .case-meta div { padding: 13px 10px; background: rgba(255, 253, 247, 0.72); }
+    .case-meta strong { display: block; color: var(--ink); font-size: 0.96rem; }
+    .case-meta span { color: var(--soft); font: 700 0.62rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.07em; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .tag { display: inline-flex; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(34, 87, 214, 0.13); color: #43506a; background: rgba(34, 87, 214, 0.045); font: 600 0.68rem 'JetBrains Mono', monospace; }
+    .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .link-chip { display: inline-flex; align-items: center; padding: 8px 11px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink); font-weight: 800; font-size: 0.78rem; }
+    .link-chip { background: rgba(255, 253, 247, 0.64); }
+    .link-chip:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+    .evidence-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 16px; }
+    .panel { border: 1px solid var(--line-strong); border-radius: var(--radius); background: rgba(255, 253, 247, 0.9); padding: 24px; box-shadow: 0 16px 45px rgba(44, 37, 25, 0.08); }
+    .panel h3 { font-size: 1.35rem; margin-bottom: 14px; }
+    .metric-table { width: 100%; border-collapse: collapse; overflow: hidden; }
+    .metric-table th, .metric-table td { padding: 13px 10px; border-bottom: 1px solid var(--line); text-align: left; font-size: 0.88rem; vertical-align: top; }
+    .metric-table th { color: var(--soft); font: 800 0.66rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.09em; }
+    .metric-table td { color: #364153; }
+    .metric-table tr:last-child td { border-bottom: 0; }
+    .metric-table a { color: var(--blue); font-weight: 800; }
+    .code-card { padding: 0; overflow: hidden; }
+    .code-card pre { padding: 20px; overflow-x: auto; color: #273142; font: 500 0.78rem/1.75 'JetBrains Mono', monospace; background: linear-gradient(180deg, rgba(255, 253, 247, 0.92), rgba(241, 236, 225, 0.86)); }
+    .code-card .console-head { border-radius: 0; }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .role-list, .writing-list { display: grid; gap: 12px; }
+    .role-item, .writing-item { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(247, 244, 236, 0.74); }
+    .role-item h3, .writing-item h3 { font-size: 1rem; letter-spacing: -0.03em; margin-bottom: 4px; }
+    .role-item p, .writing-item p { font-size: 0.88rem; color: var(--muted); }
+    .status { color: var(--green); font: 800 0.66rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+    .status.open { color: var(--amber); }
+    .blog-highlight {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    .blog-feature {
+      position: relative;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid rgba(34, 87, 214, 0.2);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 30px;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(34, 87, 214, 0.16), transparent 35%),
+        radial-gradient(circle at 86% 10%, rgba(22, 128, 61, 0.12), transparent 34%),
+        linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(244, 238, 226, 0.94));
+      box-shadow: 0 28px 80px rgba(44, 37, 25, 0.14);
+    }
+    .blog-feature::after {
+      content: '';
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 87, 214, 0.12), transparent 66%);
+      pointer-events: none;
+    }
+    .blog-feature > * { position: relative; z-index: 1; }
+    .blog-label { color: var(--blue); font: 800 0.72rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 18px; }
+    .blog-feature h3 { font-size: clamp(2rem, 4vw, 4.2rem); max-width: 780px; margin-bottom: 18px; }
+    .blog-feature p { max-width: 700px; color: #465166; font-size: 1rem; }
+    .blog-proof-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .blog-proof { padding: 7px 10px; border: 1px solid rgba(34, 87, 214, 0.13); border-radius: 999px; background: rgba(255, 253, 247, 0.7); color: #43506a; font: 700 0.68rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.07em; }
+    .blog-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .blog-stack { display: grid; gap: 12px; }
+    .blog-mini {
+      display: block;
+      min-height: 126px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 253, 247, 0.86);
+      box-shadow: 0 12px 35px rgba(44, 37, 25, 0.07);
+    }
+    .blog-mini:hover { border-color: rgba(34, 87, 214, 0.22); transform: translateY(-2px); color: var(--ink); }
+    .blog-mini span { display: block; color: var(--amber); font: 800 0.66rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 8px; }
+    .blog-mini h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .blog-mini p { color: var(--muted); font-size: 0.86rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-card { border: 1px solid var(--line-strong); border-radius: var(--radius); background: rgba(255, 253, 247, 0.9); padding: 24px; box-shadow: 0 16px 45px rgba(44, 37, 25, 0.08); }
+    .contact-card h3 { font-size: 1.25rem; margin-bottom: 14px; }
+    .contact-list { display: grid; gap: 10px; }
+    .contact-row { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .contact-row:last-child { border-bottom: 0; }
+    .contact-row span { color: var(--soft); font: 800 0.68rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-row strong { color: var(--ink); font-size: 0.9rem; }
+    .footer { padding: 38px 0 54px; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .footer p { color: var(--soft); font-size: 0.86rem; }
+    .fade-in { opacity: 0; transform: translateY(18px); transition: 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 980px) {
+      .hero-grid, .evidence-grid, .two-col, .contact-grid { grid-template-columns: 1fr; }
+      .blog-highlight { grid-template-columns: 1fr; }
+      .proof-strip { grid-template-columns: repeat(2, 1fr); }
+      .case-grid { grid-template-columns: 1fr; }
+      .case.featured { grid-column: auto; }
+      .case { min-height: auto; }
+      .section-top { grid-template-columns: 1fr; gap: 12px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .hero { padding-top: 116px; }
+      .hero h1 { font-size: 3rem; }
+      .proof-strip, .case-meta { grid-template-columns: 1fr; }
+      .log { grid-template-columns: 1fr; gap: 2px; }
+      .role-item, .writing-item { grid-template-columns: 1fr; }
+      .section { padding: 62px 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="mark"><span class="mark-dot"></span><span>Abid Khan</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="#case-files">Case Files</a>
+        <a class="nav-link" href="#evidence">Evidence</a>
+        <a class="nav-link" href="#github">GitHub</a>
+        <a class="nav-link" href="blog/index.html">Writing</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Scientific software / AI systems / open source</p>
+            <h1>I build systems that make the <span class="serif">hard parts</span> faster, safer, and useful.</h1>
+            <p class="lead">Abid Khan is a 19-year-old Computer Engineering student in India, accepted for GSoC 2026 with NumFOCUS/scikit-bio. His work spans Numba-optimized bioinformatics, AI reliability tooling, civic tech, healthcare AI, and live developer platforms.</p>
+            <div class="artifact-row" aria-label="Current proof artifacts">
+              <span class="artifact"><i></i>Accepted GSoC contributor</span>
+              <span class="artifact"><i></i>Live users + OSS reviews</span>
+              <span class="artifact"><i></i>Benchmarks, not vibes</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#case-files">View Case Files</a>
+              <a class="btn btn-secondary" href="blog/index.html">Read Technical Notes</a>
+              <a class="btn btn-secondary" href="mailto:abid@openpaws.ai">abid@openpaws.ai</a>
+            </div>
+          </div>
+          <aside class="console fade-in" aria-label="Current operating context">
+            <div class="console-head"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><span class="console-title mono">operating-context.log</span></div>
+            <div class="console-body">
+              <div class="log"><span>current</span><span>GSoC 2026 · NumFOCUS / scikit-bio</span></div>
+              <div class="log"><span>focus</span><span>Numba CPU + CUDA paths for bioinformatics kernels</span></div>
+              <div class="log"><span>shipping</span><span>Adventurers Guild · Open Paws tooling · Knight Medicare</span></div>
+              <div class="log"><span>timezone</span><span>India · UTC+5:30</span></div>
+              <div class="log"><span>signal</span><span>prototype: 2.4x faster than Cython at n=3000</span></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="proof-strip fade-in" aria-label="Proof points">
+          <div class="proof"><strong>GSoC 2026</strong><span>NumFOCUS / scikit-bio</span></div>
+          <div class="proof"><strong>500+ users</strong><span>Adventurers Guild</span></div>
+          <div class="proof"><strong>99 repos</strong><span>GitHub public footprint</span></div>
+          <div class="proof"><strong>NASA</strong><span>Space Apps Regional Finalist</span></div>
+          <div class="proof"><strong>Open Paws</strong><span>AI + advocacy tooling</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="case-files">
+      <div class="container">
+        <div class="section-top">
+          <p class="section-no">01 / Case Files</p>
+          <div>
+            <h2 class="section-title">Flagship work, presented as systems.</h2>
+            <p class="section-copy">The strongest projects here are not just apps. They are operating environments: scientific compute paths, user marketplaces, civic intelligence workflows, and clinical AI infrastructure.</p>
+            <p class="theme-note">The design language is intentionally light, precise, and evidence-led: closer to a product/research workspace than a flashy student landing page.</p>
+          </div>
+        </div>
+        <div class="case-grid">
+          <article class="case featured fade-in">
+            <div>
+              <p class="case-kicker">Scientific Python · Accepted GSoC 2026</p>
+              <h3>Numba-optimized scikit-bio performance kernels</h3>
+              <div class="system-line">CPU → CUDA → Array API fallback</div>
+              <p>Replacing performance-critical Cython paths in scikit-bio with Numba CPU and CUDA implementations. The target: keep Cython-grade CPU speed, unlock GPU-capable paths, and preserve an Array API fallback for correctness across backends.</p>
+              <div class="case-meta"><div><strong>350h</strong><span>Large project</span></div><div><strong>2.4x</strong><span>Prototype speedup</span></div><div><strong>&lt;1e-15</strong><span>Numerical agreement</span></div></div>
+              <div class="tag-row"><span class="tag">Numba</span><span class="tag">CUDA</span><span class="tag">Array API</span><span class="tag">Bioinformatics</span><span class="tag">PCoA</span></div>
+            </div>
+            <div class="link-row">              <a class="link-chip" href="blog/gsoc-scikit-bio-numba.html">Read GSoC post</a><a class="link-chip" href="https://github.com/scikit-bio/scikit-bio" target="_blank" rel="noreferrer">scikit-bio</a></div>
+          </article>
+
+          <article class="case fade-in">
+            <div>
+              <p class="case-kicker">Developer marketplace</p>
+              <h3>Adventurers Guild</h3>
+              <div class="system-line">Quests → XP → Rank → Work</div>
+              <p>Gamified platform where developers complete real quests, gain XP, and rank up from F to S tier. Selected for GirlScript Summer of Code 2025 and NSOC, with active user and contributor workflows.</p>
+              <div class="case-meta"><div><strong>500+</strong><span>Users</span></div><div><strong>25</strong><span>Forks</span></div><div><strong>Live</strong><span>Status</span></div></div>
+              <div class="tag-row"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Prisma</span><span class="tag">Stripe</span></div>
+            </div>
+            <div class="link-row"><a class="link-chip" href="https://adventurersguild.space" target="_blank" rel="noreferrer">Live</a><a class="link-chip" href="https://github.com/LarytheLord/Adventurers-Guild" target="_blank" rel="noreferrer">GitHub</a></div>
+          </article>
+
+          <article class="case fade-in">
+            <div>
+              <p class="case-kicker">Civic AI</p>
+              <h3>Open Permit</h3>
+              <div class="system-line">Permit → Legal context → Objection</div>
+              <p>AI system for generating legal objections to factory farm and planning permit proposals across jurisdictions. Born at Code 4 Compassion, then developed into a civic intelligence platform.</p>
+              <div class="case-meta"><div><strong>8+</strong><span>Countries</span></div><div><strong>37</strong><span>Frameworks</span></div><div><strong>Live</strong><span>Status</span></div></div>
+              <div class="tag-row"><span class="tag">AI/NLP</span><span class="tag">Civic Tech</span><span class="tag">Legal Workflows</span></div>
+            </div>
+            <div class="link-row"><a class="link-chip" href="https://openpermit.vercel.app" target="_blank" rel="noreferrer">Live</a><a class="link-chip" href="https://github.com/LarytheLord/Automated-Factory-Farm-Objection-Generator" target="_blank" rel="noreferrer">GitHub</a></div>
+          </article>
+
+          <article class="case fade-in">
+            <div>
+              <p class="case-kicker">Healthcare AI</p>
+              <h3>Knight Medicare</h3>
+              <div class="system-line">Clinical data → Safety → Backend</div>
+              <p>Clinical AI infrastructure for diagnosis support and patient data management. Abid is CTO and co-founder, building production readiness and security hardening into the backend.</p>
+              <div class="case-meta"><div><strong>CTO</strong><span>Role</span></div><div><strong>AI</strong><span>Clinical tooling</span></div><div><strong>Open</strong><span>PR #206</span></div></div>
+              <div class="tag-row"><span class="tag">Full-stack</span><span class="tag">Security</span><span class="tag">Backend</span><span class="tag">Healthcare</span></div>
+            </div>
+            <div class="link-row"><a class="link-chip" href="https://github.com/LarytheLord/knight-medicare/pull/206" target="_blank" rel="noreferrer">Production PR</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evidence">
+      <div class="container">
+        <div class="section-top">
+          <p class="section-no">02 / Evidence</p>
+          <div>
+            <h2 class="section-title">Technical proof beats portfolio theater.</h2>
+            <p class="section-copy">The site should make the work legible: benchmarks, reviewed PRs, production risk reduction, and concrete engineering constraints.</p>
+          </div>
+        </div>
+        <div class="evidence-grid">
+          <article class="panel fade-in">
+            <h3>Selected OSS contributions</h3>
+            <table class="metric-table">
+              <thead><tr><th>Repo</th><th>Work</th><th>Signal</th></tr></thead>
+              <tbody>
+                <tr><td>scikit-bio</td><td><a href="https://github.com/scikit-bio/scikit-bio/pull/2429" target="_blank" rel="noreferrer">#2429</a>, <a href="https://github.com/scikit-bio/scikit-bio/pull/2436" target="_blank" rel="noreferrer">#2436</a></td><td>Array API foundation for GSoC performance work</td></tr>
+                <tr><td>daytona</td><td><a href="https://github.com/daytonaio/daytona/pull/4107" target="_blank" rel="noreferrer">#4107</a></td><td>Merged sync-session stdin handling fix</td></tr>
+                <tr><td>nextflow</td><td><a href="https://github.com/nextflow-io/nextflow/pull/6869" target="_blank" rel="noreferrer">#6869</a></td><td>Clarified staged path behavior in bioinformatics pipelines</td></tr>
+                <tr><td>scanpy</td><td><a href="https://github.com/scverse/scanpy/pull/3986" target="_blank" rel="noreferrer">#3986</a></td><td>Reduced duplicated scientific docs drift</td></tr>
+                <tr><td>codecarbon</td><td><a href="https://github.com/mlco2/codecarbon/pull/1080" target="_blank" rel="noreferrer">#1080</a></td><td>CLI robustness for emissions tooling</td></tr>
+                <tr><td>kepler</td><td><a href="https://github.com/sustainable-computing-io/kepler/pull/2431" target="_blank" rel="noreferrer">#2431</a></td><td>Minimal install path for Kubernetes energy monitoring</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="console code-card fade-in">
+            <div class="console-head"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><span class="console-title mono">benchmark.snapshot</span></div>
+            <pre>center_distance_matrix prototype
+
+Size      Cython      Numba @njit(parallel=True)
+n=500     0.39 ms     0.34 ms
+n=1000    1.75 ms     1.01 ms
+n=3000    19.3 ms     7.91 ms
+
+Result: 2.4x faster at n=3000
+Accuracy: max abs diff &lt; 1e-15
+Memory: in-place pattern preserved
+
+dispatch target:
+Numba CPU -> Numba CUDA -> Array API fallback</pre>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="github">
+      <div class="container">
+        <div class="section-top">
+          <p class="section-no">03 / GitHub</p>
+          <div>
+            <h2 class="section-title">Recent work clusters around trust.</h2>
+            <p class="section-copy">The current engineering pattern is clear: AI output validation, security hardening, maintainership structure, and production readiness.</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <article class="panel fade-in">
+            <h3>Recent public PRs</h3>
+            <div class="role-list">
+              <div class="role-item"><div><h3>desloppify intelligence gate</h3><p>De-hallucination gate for API veracity in Open Paws AI workflows.</p></div><a class="status" href="https://github.com/Open-Paws/desloppify/pull/36" target="_blank" rel="noreferrer">Merged</a></div>
+              <div class="role-item"><div><h3>Adventurers Guild security</h3><p>TLS production guard, PII log removal, and URL sanitization.</p></div><a class="status open" href="https://github.com/LarytheLord/Adventurers-Guild/pull/215" target="_blank" rel="noreferrer">Open</a></div>
+              <div class="role-item"><div><h3>Knight Medicare readiness</h3><p>Security hardening and backend production enhancements.</p></div><a class="status open" href="https://github.com/LarytheLord/knight-medicare/pull/206" target="_blank" rel="noreferrer">Open</a></div>
+              <div class="role-item"><div><h3>pydantic-ai validation</h3><p>Strict runtime validation for tool outputs in Python AI tooling.</p></div><a class="status open" href="https://github.com/pydantic/pydantic-ai/pull/5239" target="_blank" rel="noreferrer">Open</a></div>
+            </div>
+          </article>
+          <article class="panel fade-in">
+            <h3>Current roles</h3>
+            <div class="role-list">
+              <div class="role-item"><div><h3>GSoC Contributor</h3><p>NumFOCUS / scikit-bio, Numba-optimized performance-critical functions.</p></div><span class="status">Accepted</span></div>
+              <div class="role-item"><div><h3>Rapid Impact Developer</h3><p>Open Paws AI tooling for animal advocacy and campaign workflows.</p></div><span class="status">Active</span></div>
+              <div class="role-item"><div><h3>CTO & Co-Founder</h3><p>Knight Medicare, building clinical AI and backend infrastructure.</p></div><span class="status open">Building</span></div>
+              <div class="role-item"><div><h3>Google Gemini Campus Ambassador</h3><p>Representing Gemini and AI education on campus.</p></div><span class="status">Campus</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="writing">
+      <div class="container">
+        <div class="section-top">
+          <p class="section-no">04 / Field Notes</p>
+          <div>
+            <h2 class="section-title">The blog is where the proof gets unpacked.</h2>
+            <p class="section-copy">The homepage gives the signal. The blog gives the architecture, benchmarks, tradeoffs, and operating notes behind the work.</p>
+          </div>
+        </div>
+        <div class="blog-highlight">
+          <article class="blog-feature fade-in">
+            <div>
+              <p class="blog-label">Featured technical note</p>
+              <h3>GSoC 2026: Numba-Optimized scikit-bio</h3>
+              <p>The accepted NumFOCUS/scikit-bio project, why Cython is fast but GPU-blind, how Numba fits the dispatch architecture, and what the prototype benchmarks prove.</p>
+              <div class="blog-proof-row">
+                <span class="blog-proof">350h project</span>
+                <span class="blog-proof">2.4x prototype speedup</span>
+                <span class="blog-proof">&lt;1e-15 agreement</span>
+                <span class="blog-proof">CPU + CUDA</span>
+              </div>
+            </div>
+            <div class="blog-cta-row">
+              <a class="btn btn-primary" href="blog/gsoc-scikit-bio-numba.html">Read the GSoC post</a>
+              <a class="btn btn-secondary" href="blog/index.html">Open all writing</a>
+            </div>
+          </article>
+          <div class="blog-stack">
+            <a class="blog-mini fade-in" href="blog/oss-contributions.html"><span>Open Source</span><h3>Selected OSS Contributions</h3><p>Reviewer-approved work across scientific Python, sustainability tooling, developer infrastructure, and Open Paws repos.</p></a>
+            <a class="blog-mini fade-in" href="blog/recent-github-work.html"><span>GitHub Trail</span><h3>Recent GitHub Work</h3><p>May 2026 public PRs around AI reliability, security hardening, and production readiness.</p></a>
+            <a class="blog-mini fade-in" href="blog/adventurers-guild.html"><span>Case Study</span><h3>The Adventurers Guild</h3><p>How the RPG-inspired developer marketplace works as a real community and product system.</p></a>
+            <a class="blog-mini fade-in" href="blog/index.html"><span>Archive</span><h3>Browse all posts</h3><p>Project breakdowns, technical notes, workflow essays, and operating context from the full portfolio.</p></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-top">
+          <p class="section-no">05 / Contact</p>
+          <div>
+            <h2 class="section-title">Reach out when the work has teeth.</h2>
+            <p class="section-copy">Best fit: scientific Python, AI reliability, civic tech, animal advocacy tooling, healthcare AI, and serious open-source collaboration.</p>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <article class="contact-card fade-in">
+            <h3>Identity</h3>
+            <div class="contact-list">
+              <div class="contact-row"><div><span>Name</span><strong>Abid Khan / Abi</strong></div></div>
+              <div class="contact-row"><div><span>Age</span><strong>19</strong></div></div>
+              <div class="contact-row"><div><span>Education</span><strong>Computer Engineering, GTU - GIDC Navsari</strong></div></div>
+              <div class="contact-row"><div><span>Location</span><strong>India, UTC+5:30</strong></div></div>
+            </div>
+          </article>
+          <article class="contact-card fade-in">
+            <h3>Links</h3>
+            <div class="contact-list">
+              <div class="contact-row"><div><span>Email</span><strong>abid@openpaws.ai</strong></div><a class="link-chip" href="mailto:abid@openpaws.ai">Email</a></div>
+              <div class="contact-row"><div><span>GitHub</span><strong>github.com/LarytheLord</strong></div><a class="link-chip" href="https://github.com/LarytheLord" target="_blank" rel="noreferrer">Open</a></div>
+              <div class="contact-row"><div><span>LinkedIn</span><strong>linkedin.com/in/abikhn</strong></div><a class="link-chip" href="https://linkedin.com/in/abikhn" target="_blank" rel="noreferrer">Open</a></div>
+              <div class="contact-row"><div><span>X</span><strong>x.com/larysonlawliet</strong></div><a class="link-chip" href="https://x.com/larysonlawliet" target="_blank" rel="noreferrer">Open</a></div>
+              <div class="contact-row"><div><span>Instagram</span><strong>@aulterabid</strong></div><a class="link-chip" href="https://instagram.com/aulterabid" target="_blank" rel="noreferrer">Open</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="mono">Abid Khan · Scientific software, AI systems, open source.</p>
+      <div class="link-row"><a class="link-chip" href="https://github.com/LarytheLord" target="_blank" rel="noreferrer">GitHub</a><a class="link-chip" href="blog/index.html">Blog</a><a class="link-chip" href="Abid-Khan-CV.pdf" download="Abid-Khan-CV.pdf">Resume</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -45px 0px' });
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    });
+  </script>
+</body>
+
+</html>
