@@ -320,10 +320,11 @@
             <div class="console-head"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><span class="console-title mono">operating-context.log</span></div>
             <div class="console-body">
               <div class="log"><span>current</span><span>GSoC 2026 · NumFOCUS / scikit-bio</span></div>
-              <div class="log"><span>focus</span><span>Numba CPU + CUDA paths for bioinformatics kernels</span></div>
+              <div class="log"><span>focus</span><span>GPU-resident distance matrices via the Array API</span></div>
               <div class="log"><span>shipping</span><span>Adventurers Guild · Open Paws tooling · Knight Medicare</span></div>
               <div class="log"><span>timezone</span><span>India · UTC+5:30</span></div>
-              <div class="log"><span>signal</span><span>prototype: 2.4x faster than Cython at n=3000</span></div>
+              <div class="log"><span>discipline</span><span>every number here ran on real hardware before it shipped</span></div>
+              <div class="log"><span>signal</span><span>same kernel verified on NVIDIA + 2x AMD Instinct GPUs</span></div>
             </div>
           </aside>
         </div>
@@ -351,14 +352,14 @@
         <div class="case-grid">
           <article class="case featured fade-in">
             <div>
-              <p class="case-kicker">Scientific Python · Accepted GSoC 2026</p>
-              <h3>Numba-optimized scikit-bio performance kernels</h3>
-              <div class="system-line">CPU → CUDA → Array API fallback</div>
-              <p>Replacing performance-critical Cython paths in scikit-bio with Numba CPU and CUDA implementations. The target: keep Cython-grade CPU speed, unlock GPU-capable paths, and preserve an Array API fallback for correctness across backends.</p>
-              <div class="case-meta"><div><strong>350h</strong><span>Large project</span></div><div><strong>2.4x</strong><span>Prototype speedup</span></div><div><strong>&lt;1e-15</strong><span>Numerical agreement</span></div></div>
-              <div class="tag-row"><span class="tag">Numba</span><span class="tag">CUDA</span><span class="tag">Array API</span><span class="tag">Bioinformatics</span><span class="tag">PCoA</span></div>
+              <p class="case-kicker">Scientific Python · GSoC 2026, in progress</p>
+              <h3>Numba + GPU performance kernels for scikit-bio</h3>
+              <div class="system-line">Numba CPU (merged) → GPU-resident Array API → CUDA / ROCm kernels</div>
+              <p>Replaced performance-critical Cython paths in scikit-bio with a Numba CPU engine, now merged to <code>main</code>. Current work makes the distance-matrix classes GPU-capable through the Array API, so data that already lives on a GPU stays there through PERMANOVA and Mantel — verified with the same source running correctly on both NVIDIA and AMD hardware.</p>
+              <div class="case-meta"><div><strong>Merged</strong><span>Numba CPU engine</span></div><div><strong>NVIDIA + AMD</strong><span>Same source, verified</span></div><div><strong>&lt;1e-15</strong><span>Numerical agreement</span></div></div>
+              <div class="tag-row"><span class="tag">Numba</span><span class="tag">CUDA</span><span class="tag">ROCm</span><span class="tag">Array API</span><span class="tag">Bioinformatics</span></div>
             </div>
-            <div class="link-row">              <a class="link-chip" href="blog/gsoc-scikit-bio-numba.html">Read GSoC post</a><a class="link-chip" href="https://github.com/scikit-bio/scikit-bio" target="_blank" rel="noreferrer">scikit-bio</a></div>
+            <div class="link-row"><a class="link-chip" href="blog/gsoc-skbio-gpu-array-api.html">Read GPU progress update</a><a class="link-chip" href="blog/gsoc-scikit-bio-numba.html">Read GSoC announcement</a><a class="link-chip" href="https://github.com/scikit-bio/scikit-bio" target="_blank" rel="noreferrer">scikit-bio</a></div>
           </article>
 
           <article class="case fade-in">
@@ -426,19 +427,19 @@
           </article>
           <article class="console code-card fade-in">
             <div class="console-head"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><span class="console-title mono">benchmark.snapshot</span></div>
-            <pre>center_distance_matrix prototype
+            <pre>PERMANOVA row-tile Numba kernel (merged, PR #2488)
 
-Size      Cython      Numba @njit(parallel=True)
-n=500     0.39 ms     0.34 ms
-n=1000    1.75 ms     1.01 ms
-n=3000    19.3 ms     7.91 ms
+~8x faster than single-permutation Cython
+~2.4x off the hand-optimized C++ reference
+at n=25,000 / 9,999 permutations
+Accuracy: max abs diff &lt; 1e-15 vs Cython
 
-Result: 2.4x faster at n=3000
-Accuracy: max abs diff &lt; 1e-15
-Memory: in-place pattern preserved
+GPU cross-vendor verification (same source)
+NVIDIA RTX 4060 .......... matches reference
+AMD Instinct MI210 ....... matches reference
+AMD Instinct MI300 ....... matches reference
 
-dispatch target:
-Numba CPU -> Numba CUDA -> Array API fallback</pre>
+dispatch: Numba CPU -> Numba CUDA/HIP -> Array API fallback</pre>
           </article>
         </div>
       </div>
@@ -457,6 +458,7 @@ Numba CPU -> Numba CUDA -> Array API fallback</pre>
           <article class="panel fade-in">
             <h3>Recent public PRs</h3>
             <div class="role-list">
+              <div class="role-item"><div><h3>scikit-bio: GPU-capable DistanceMatrix</h3><p>Array API support so DistanceMatrix can hold a GPU-resident buffer, verified on an AMD Instinct MI210.</p></div><a class="status open" href="https://github.com/scikit-bio/scikit-bio/pull/2499" target="_blank" rel="noreferrer">In review</a></div>
               <div class="role-item"><div><h3>desloppify intelligence gate</h3><p>De-hallucination gate for API veracity in Open Paws AI workflows.</p></div><a class="status" href="https://github.com/Open-Paws/desloppify/pull/36" target="_blank" rel="noreferrer">Merged</a></div>
               <div class="role-item"><div><h3>Adventurers Guild security</h3><p>TLS production guard, PII log removal, and URL sanitization.</p></div><a class="status open" href="https://github.com/LarytheLord/Adventurers-Guild/pull/215" target="_blank" rel="noreferrer">Open</a></div>
               <div class="role-item"><div><h3>Knight Medicare readiness</h3><p>Security hardening and backend production enhancements.</p></div><a class="status open" href="https://github.com/LarytheLord/knight-medicare/pull/206" target="_blank" rel="noreferrer">Open</a></div>
@@ -466,7 +468,7 @@ Numba CPU -> Numba CUDA -> Array API fallback</pre>
           <article class="panel fade-in">
             <h3>Current roles</h3>
             <div class="role-list">
-              <div class="role-item"><div><h3>GSoC Contributor</h3><p>NumFOCUS / scikit-bio, Numba-optimized performance-critical functions.</p></div><span class="status">Accepted</span></div>
+              <div class="role-item"><div><h3>GSoC Contributor</h3><p>NumFOCUS / scikit-bio. CPU Numba engine merged, now shipping GPU support.</p></div><span class="status">In progress</span></div>
               <div class="role-item"><div><h3>Rapid Impact Developer</h3><p>Open Paws AI tooling for animal advocacy and campaign workflows.</p></div><span class="status">Active</span></div>
               <div class="role-item"><div><h3>CTO & Co-Founder</h3><p>Knight Medicare, building clinical AI and backend infrastructure.</p></div><span class="status open">Building</span></div>
               <div class="role-item"><div><h3>Google Gemini Campus Ambassador</h3><p>Representing Gemini and AI education on campus.</p></div><span class="status">Campus</span></div>
@@ -489,23 +491,24 @@ Numba CPU -> Numba CUDA -> Array API fallback</pre>
           <article class="blog-feature fade-in">
             <div>
               <p class="blog-label">Featured technical note</p>
-              <h3>GSoC 2026: Numba-Optimized scikit-bio</h3>
-              <p>The accepted NumFOCUS/scikit-bio project, why Cython is fast but GPU-blind, how Numba fits the dispatch architecture, and what the prototype benchmarks prove.</p>
+              <h3>Making scikit-bio's Distance Matrices GPU-Capable</h3>
+              <p>The current phase of the GSoC project: a GPU-resident distance matrix flowing through PERMANOVA and Mantel via the Array API, with the same source verified correct on both NVIDIA and AMD hardware.</p>
               <div class="blog-proof-row">
-                <span class="blog-proof">350h project</span>
-                <span class="blog-proof">2.4x prototype speedup</span>
+                <span class="blog-proof">CPU engine merged</span>
+                <span class="blog-proof">NVIDIA + 2x AMD verified</span>
                 <span class="blog-proof">&lt;1e-15 agreement</span>
-                <span class="blog-proof">CPU + CUDA</span>
+                <span class="blog-proof">Array API</span>
               </div>
             </div>
             <div class="blog-cta-row">
-              <a class="btn btn-primary" href="blog/gsoc-scikit-bio-numba.html">Read the GSoC post</a>
+              <a class="btn btn-primary" href="blog/gsoc-skbio-gpu-array-api.html">Read the GPU progress update</a>
               <a class="btn btn-secondary" href="blog/index.html">Open all writing</a>
             </div>
           </article>
           <div class="blog-stack">
+            <a class="blog-mini fade-in" href="blog/gsoc-scikit-bio-numba.html"><span>GSoC 2026</span><h3>The GSoC Announcement</h3><p>Why Cython is fast but GPU-blind, how Numba fits the dispatch architecture, and the May/June progress that got the CPU engine merged.</p></a>
             <a class="blog-mini fade-in" href="blog/oss-contributions.html"><span>Open Source</span><h3>Selected OSS Contributions</h3><p>Reviewer-approved work across scientific Python, sustainability tooling, developer infrastructure, and Open Paws repos.</p></a>
-            <a class="blog-mini fade-in" href="blog/recent-github-work.html"><span>GitHub Trail</span><h3>Recent GitHub Work</h3><p>May 2026 public PRs around AI reliability, security hardening, and production readiness.</p></a>
+            <a class="blog-mini fade-in" href="blog/recent-github-work.html"><span>GitHub Trail</span><h3>Recent GitHub Work</h3><p>Public PRs around AI reliability, security hardening, and production readiness.</p></a>
             <a class="blog-mini fade-in" href="blog/adventurers-guild.html"><span>Case Study</span><h3>The Adventurers Guild</h3><p>How the RPG-inspired developer marketplace works as a real community and product system.</p></a>
             <a class="blog-mini fade-in" href="blog/index.html"><span>Archive</span><h3>Browse all posts</h3><p>Project breakdowns, technical notes, workflow essays, and operating context from the full portfolio.</p></a>
           </div>
