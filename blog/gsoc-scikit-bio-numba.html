@@ -57,15 +57,14 @@
         <li><a href="#scope">Project Scope</a></li>
         <li><a href="#mentors">Mentors</a></li>
         <li><a href="#timeline">Timeline</a></li>
-        <li><a href="#progress-may">May Progress</a></li>
-        <li><a href="#progress-june">June Progress</a></li>
+        <li><a href="#milestones">Milestones</a></li>
         <li><a href="#why-it-matters">Why It Matters</a></li>
       </ul>
     </aside>
 
     <article class="post-article">
       <div class="callout green">
-        <p><strong>Update — July 2026:</strong> The Numba CPU work has merged and the project has moved on to GPU support. For the latest, read the progress update: <a href="gsoc-skbio-gpu-array-api.html">Making scikit-bio's Distance Matrices GPU-Capable →</a></p>
+        <p><strong>This page is the hub for the whole project.</strong> The background below covers why the project exists and what was proposed; the <a href="#milestones">Milestones</a> section is where each piece of shipped work lives, in order, from the first Numba CPU port through the current GPU work. Latest: <a href="gsoc-skbio-permanova-mantel-gpu.html">GPU support for PERMANOVA and Mantel →</a></p>
       </div>
       <section id="acceptance">
         <span class="section-label">Announcement</span>
@@ -227,126 +226,42 @@ def center_distance_matrix_numba(D):
         </div>
       </section>
 
-      <section id="progress-may">
+      <section id="milestones">
         <span class="section-label">Progress</span>
-        <h2>End of May: First Week of Coding</h2>
-        <p>The official coding period began May 25, 2026. This update covers what shipped, what is in active review, and the engineering lessons that came out of the first week of work.</p>
-
-        <h3>Merged Pull Requests</h3>
+        <h2>Milestones</h2>
+        <p>Everything shipped on this project so far, in order. Each card links to the full write-up for that milestone: what shipped, the PRs behind it, and the engineering lessons that came out of it.</p>
         <div class="pr-list">
           <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2464</span>
+            <span class="pr-repo-badge">Milestone 1 · May 2026</span>
             <div>
-              <h4>Numba CPU permuted Pearson helpers for Mantel</h4>
-              <p>Direct Cython-to-Numba conversion of <code>mantel_perm_pearsonr_cy</code> and its condensed-form variant. The Numba implementation preserves the same loop structure and parallelism axis as the original Cython. A <code>NUMBA_AVAILABLE</code> dispatch keeps Numba an optional dependency: if it is not installed, the existing Cython path stays in service unchanged.</p>
+              <h4><a href="gsoc-milestone-1-cpu-numba-first-week.html">First Numba CPU Ports: Mantel and PERMANOVA</a></h4>
+              <p>The first week of coding: direct Cython-to-Numba ports of Mantel's Pearson helper (#2464, merged) and its CI infrastructure (#2468, merged), plus PERMANOVA's s_W helper (#2470, opened). Includes the Numba 0.65.1 parfor cycle bug and the workaround for it.</p>
             </div>
           </div>
           <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2468</span>
+            <span class="pr-repo-badge">Milestone 2 · June 2026</span>
             <div>
-              <h4>Numba-aware Mantel tests and CI workflow</h4>
-              <p>Test infrastructure for the Numba conversion work: paired <code>_cy</code> and <code>_numba</code> tests against the same fixtures, dispatch fallback tests via <code>patch.object(NUMBA_AVAILABLE, False)</code>, and a <code>numba_code</code> pytest marker. The CI workflow runs the marker across four operating systems (Ubuntu x86_64, Ubuntu ARM64, macOS, Windows) on Python 3.14.</p>
+              <h4><a href="gsoc-milestone-2-cpu-numba-complete.html">CPU Numba Performance, Merged</a></h4>
+              <p>PERMANOVA's Numba path merged (#2470), then went through a full performance arc — permutation-axis parallelism (#2484), coverage tooling (#2486), and the row-tile kernel breakthrough (#2488) — before landing on <code>main</code> (#2490) at roughly 8x over single-permutation Cython.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">Milestone 3 · July 2026</span>
+            <div>
+              <h4><a href="gsoc-skbio-gpu-array-api.html">Making scikit-bio's Distance Matrices GPU-Capable</a></h4>
+              <p>With the CPU engine done, <code>DistanceMatrix</code> itself learned to hold a GPU-resident buffer (PR #2499, merged) — the foundation the function-level GPU work builds on, verified on a real AMD Instinct MI210.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">Milestone 4 · July 2026</span>
+            <div>
+              <h4><a href="gsoc-skbio-permanova-mantel-gpu.html">GPU Support Lands for PERMANOVA and Mantel</a></h4>
+              <p>PERMANOVA and Mantel now dispatch on where the distance matrix lives, computing through the Array API on a GPU-resident matrix with the exact same semantics as the NumPy path (PR #2503, in review).</p>
             </div>
           </div>
         </div>
-
-        <h3>Pull Request in Active Review</h3>
-        <div class="pr-list">
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2470</span>
-            <div>
-              <h4>Numba CPU s_W helpers for PERMANOVA</h4>
-              <p>Direct conversion of <code>permanova_f_stat_sW_cy</code> and the condensed-form variant. CI is green across the full Python matrix on four operating systems. Review feedback has been addressed through follow-up commits including a partial-sum simplification, a test class restructure that mirrors the Mantel test architecture, and replacement of an inline Python reference computation with a hardcoded value from the trusted Cython implementation.</p>
-            </div>
-          </div>
-        </div>
-
-        <h3>Numba 0.65.1 parfor cycle bug</h3>
-        <p>The natural Numba code for PERMANOVA's s_W crashes at compile time with <code>AssertionError: unexpected cycle in lookup()</code> from inside the parfor reduction-analysis pass. The crash needs two features together: a cross-iteration scalar reduction in the outer <code>prange</code>, and an <code>if</code> conditional inside the inner loop that reads from a parameter array. Either feature alone compiles fine.</p>
-
-        <div class="code-block">
-          <div class="code-block-header"><span>The minimal trigger</span></div>
-          <pre>@njit(parallel=True)
-def natural_sW(mat, group_sizes, grouping):
-    n = mat.shape[0]
-    s_W = 0.0
-    for row in prange(n - 1):
-        group = grouping[row]
-        local = 0.0
-        for col in range(row + 1, n):
-            if grouping[col] == group:        # conditional read of a parameter
-                val = mat[row, col]
-                local += val * val
-        s_W += local / group_sizes[group]      # cross-iteration scalar reduction
-    return s_W</pre>
-        </div>
-
-        <p>The workaround replaces the scalar reduction with per-iteration writes to a <code>partials</code> array, summed once after the <code>prange</code> exits. The conditional stays in place. Beyond sidestepping the bug, this pattern has a useful property for the future GPU work: <code>parallel=True</code> reductions are a CPU-only Numba feature, but the per-iteration-slot pattern maps directly to <code>@cuda.jit</code>.</p>
-
-        <h3>Engineering lesson: tests should validate against trusted references</h3>
-        <p>One review point that came up on PR #2470 was about test design. The initial test class included a Python reimplementation of the s_W computation as the "expected value" for the paired <code>_cy</code> and <code>_numba</code> tests. That carries a subtle bug-masking risk: if the test reimplementation and the function under test share the same misunderstanding of the formula, both pass together while being wrong together.</p>
-        <p>The fix looks obvious in hindsight. Compute the expected value once using the trusted reference implementation (here, the pre-existing Cython), hardcode the resulting number, and assert against it. The test no longer carries an algorithmic implementation. It carries a single value from a trusted source.</p>
-
-        <h3>Peer collaboration on PCoA</h3>
-        <p>Another GSoC contributor on the same scikit-bio project is working on Numba CPU and GPU implementations of <code>center_distance_matrix</code> for PCoA. The first week of collaboration covered how to structure the work as separate CPU and GPU PRs, how to slot the new tests into the existing Numba CI workflow, and how the Mantel and PERMANOVA architecture can serve as a template for that branch.</p>
-
-        <h3>What's queued next</h3>
-        <p>Three pieces of work are queued behind PR #2470:</p>
-        <ol>
-          <li><strong>Interface cleanup PR.</strong> Make Numba opt-in rather than auto-selected on installation, and rename the <code>_numba</code> function suffix to <code>_nb</code> to match the existing <code>_cy</code> convention. This will target Mantel and PERMANOVA at the same time.</li>
-          <li><strong>Block-permutation optimization for PERMANOVA.</strong> Process multiple permutations per matrix scan, with cache tiling and a parallelization axis flipped from matrix rows to permutation blocks. The C++ reference for this is in the <code>scikit-bio-binaries</code> repository.</li>
-          <li><strong>GPU <code>@cuda.jit</code> implementation.</strong> Builds on the optimized CPU code. The partials pattern from the parfor workaround already aligns with the structure needed for this transition.</li>
-        </ol>
-      </section>
-
-      <section id="progress-june">
-        <span class="section-label">Progress</span>
-        <h2>June: CPU Numba Performance, Merged</h2>
-        <p>June turned that first-week foundation into a complete, merged CPU story. Every item queued at the end of May landed, and the PERMANOVA kernel went through a performance arc that ended competitive with the hand-written C++ reference.</p>
-
-        <h3>Merged Pull Requests</h3>
-        <div class="pr-list">
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2470</span>
-            <div>
-              <h4>Numba CPU s_W helpers for PERMANOVA</h4>
-              <p>The May in-review PR merged after the test-against-a-trusted-reference and partial-sum revisions.</p>
-            </div>
-          </div>
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2484</span>
-            <div>
-              <h4>Parallelize the PERMANOVA engine across the permutation axis</h4>
-              <p>Flipped the parallel axis from matrix rows to permutation blocks, so each thread handles whole permutations — a better fit for the Monte-Carlo permutation workload.</p>
-            </div>
-          </div>
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2486</span>
-            <div>
-              <h4>Measure Numba code coverage by disabling the JIT</h4>
-              <p>Running under <code>NUMBA_DISABLE_JIT</code> lets coverage tooling see inside the compiled functions, so the Numba paths are properly reported.</p>
-            </div>
-          </div>
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2488</span>
-            <div>
-              <h4>Single-pass row-tile PERMANOVA kernel</h4>
-              <p>The performance breakthrough: a cache-tiled kernel that reads the distance matrix <em>once</em> across all permutations instead of once per permutation. Roughly 8× over the original Cython single-permutation path, and within a small factor of the hand-optimized C++ reference at large scale.</p>
-            </div>
-          </div>
-          <div class="pr-entry">
-            <span class="pr-repo-badge">scikit-bio #2490</span>
-            <div>
-              <h4>Optional Numba support merged to main</h4>
-              <p>The Numba engine line landed in the main branch. Numba is opt-in (falling back to Cython when it is not installed), and the function suffix was aligned to the existing <code>_cy</code> convention. This closed out the CPU phase.</p>
-            </div>
-          </div>
-        </div>
-
-        <h3>The performance arc</h3>
-        <p>The kernel evolved from a direct Cython port, to a parallel-over-permutations version, to a single-pass row-tiled kernel that amortises the matrix read across the whole permutation batch. Benchmarks were run at up to 25,000×25,000 distance matrices with 9,999 permutations, against an OpenMP-enabled baseline, with numerical agreement asserted below <code>1e-15</code> between paths.</p>
-        <div class="callout green">
-          <p>By the end of June the Numba CPU engine matched or beat the existing paths and was merged into <code>main</code> — clearing the way for the GPU phase covered in the <a href="gsoc-skbio-gpu-array-api.html">next update</a>.</p>
+        <div class="callout amber">
+          <p>Next up: a Numba <code>@cuda.jit</code>/<code>@hip.jit</code> kernel backend for real GPU performance (not just correctness), and bringing the ordination path (PCoA) along the same way. This section gets a new card as each milestone lands.</p>
         </div>
       </section>
 

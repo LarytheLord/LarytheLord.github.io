@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSoC 2026 Milestone 2: CPU Numba Engine Complete — scikit-bio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="nav-container">
+      <h1><a href="../index.html">Abid Khan</a></h1>
+      <a href="index.html" class="nav-back">← All Posts</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="post-hero">
+    <div class="post-hero-inner">
+      <span class="post-eyebrow">GSoC 2026 · Milestone 2 of 4 · scikit-bio</span>
+      <h1>June: CPU Numba Performance, Merged</h1>
+      <p class="post-hero-lead">June turned the first week's foundation into a complete, merged CPU story. Every item queued behind PR #2470 landed, and the PERMANOVA kernel went through a performance arc that ended competitive with the hand-written C++ reference.</p>
+      <div class="post-meta-row">
+        <span class="badge green">5 PRs merged</span>
+        <span class="badge blue">8x over Cython</span>
+        <span class="badge amber">&lt;1e-15 agreement</span>
+      </div>
+      <div class="post-hero-links">
+        <a href="gsoc-scikit-bio-numba.html#milestones" class="btn-primary">← GSoC hub</a>
+        <a href="https://github.com/scikit-bio/scikit-bio" target="_blank" class="btn-ghost">scikit-bio ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="post-hero-inner">
+    <div class="stat-strip">
+      <div class="stat-strip-item"><strong>8x</strong><span>Over single-perm Cython</span></div>
+      <div class="stat-strip-item"><strong>~2.4x</strong><span>Off the C++ reference</span></div>
+      <div class="stat-strip-item"><strong>25,000²</strong><span>Largest benchmark size</span></div>
+      <div class="stat-strip-item"><strong>&lt;1e-15</strong><span>Numerical agreement</span></div>
+    </div>
+  </div>
+
+  <div class="post-layout">
+    <aside class="post-toc">
+      <div class="toc-title">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#merged">Merged Pull Requests</a></li>
+        <li><a href="#arc">The performance arc</a></li>
+      </ul>
+    </aside>
+
+    <article class="post-article">
+      <section id="merged">
+        <span class="section-label">Progress</span>
+        <h2>Merged Pull Requests</h2>
+        <div class="pr-list">
+          <div class="pr-entry">
+            <span class="pr-repo-badge">scikit-bio #2470</span>
+            <div>
+              <h4>Numba CPU s_W helpers for PERMANOVA</h4>
+              <p>The May in-review PR merged after the test-against-a-trusted-reference and partial-sum revisions.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">scikit-bio #2484</span>
+            <div>
+              <h4>Parallelize the PERMANOVA engine across the permutation axis</h4>
+              <p>Flipped the parallel axis from matrix rows to permutation blocks, so each thread handles whole permutations — a better fit for the Monte-Carlo permutation workload.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">scikit-bio #2486</span>
+            <div>
+              <h4>Measure Numba code coverage by disabling the JIT</h4>
+              <p>Running under <code>NUMBA_DISABLE_JIT</code> lets coverage tooling see inside the compiled functions, so the Numba paths are properly reported.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">scikit-bio #2488</span>
+            <div>
+              <h4>Single-pass row-tile PERMANOVA kernel</h4>
+              <p>The performance breakthrough: a cache-tiled kernel that reads the distance matrix <em>once</em> across all permutations instead of once per permutation. Roughly 8× over the original Cython single-permutation path, and within a small factor of the hand-optimized C++ reference at large scale.</p>
+            </div>
+          </div>
+          <div class="pr-entry">
+            <span class="pr-repo-badge">scikit-bio #2490</span>
+            <div>
+              <h4>Optional Numba support merged to main</h4>
+              <p>The Numba engine line landed in the main branch. Numba is opt-in (falling back to Cython when it is not installed), and the function suffix was aligned to the existing <code>_cy</code> convention. This closed out the CPU phase.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="arc">
+        <span class="section-label">Performance</span>
+        <h2>The performance arc</h2>
+        <p>The kernel evolved from a direct Cython port, to a parallel-over-permutations version, to a single-pass row-tiled kernel that amortises the matrix read across the whole permutation batch. Benchmarks were run at up to 25,000×25,000 distance matrices with 9,999 permutations, against an OpenMP-enabled baseline, with numerical agreement asserted below <code>1e-15</code> between paths.</p>
+        <div class="callout green">
+          <p>By the end of June the Numba CPU engine matched or beat the existing paths and was merged into <code>main</code> — clearing the way for the GPU phase covered in the <a href="gsoc-skbio-gpu-array-api.html">next milestone</a>.</p>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <nav class="post-footer-nav">
+    <a href="gsoc-milestone-1-cpu-numba-first-week.html" class="btn-ghost">← Milestone 1</a>
+    <a href="gsoc-skbio-gpu-array-api.html" class="btn-ghost">Next: GPU-Capable DistanceMatrix →</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <strong>Abid Khan</strong>
+      <span class="footer-muted">Builder, Operator, Shipper</span>
+    </div>
+    <div class="footer-links">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">Blog</a>
+      <a href="https://github.com/LarytheLord" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
