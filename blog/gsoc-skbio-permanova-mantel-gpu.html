@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSoC 2026: GPU Support Lands for PERMANOVA and Mantel — scikit-bio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="nav-container">
+      <h1><a href="../index.html">Abid Khan</a></h1>
+      <a href="index.html" class="nav-back">← All Posts</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="post-hero">
+    <div class="post-hero-inner">
+      <span class="post-eyebrow">GSoC 2026 · scikit-bio · GPU + Array API</span>
+      <h1>GPU Support Lands for PERMANOVA and Mantel</h1>
+      <p class="post-hero-lead">Follow-up to the GPU-capable DistanceMatrix work: PERMANOVA and Mantel now dispatch on where the distance matrix actually lives, computing through the Array API when the data is GPU-resident, with the exact same statistical semantics as the NumPy path.</p>
+      <div class="post-meta-row">
+        <span class="badge green">PR #2503 opened</span>
+        <span class="badge blue">Array API</span>
+        <span class="badge amber">AMD Instinct MI210</span>
+        <span class="badge purple">Development branch</span>
+      </div>
+      <div class="post-hero-links">
+        <a href="https://github.com/scikit-bio/scikit-bio/pull/2503" target="_blank" class="btn-primary">PR #2503 ↗</a>
+        <a href="gsoc-skbio-gpu-array-api.html" class="btn-ghost">← Previous update</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="post-hero-inner">
+    <div class="stat-strip">
+      <div class="stat-strip-item"><strong>2 functions</strong><span>PERMANOVA + Mantel</span></div>
+      <div class="stat-strip-item"><strong>+336 / -0</strong><span>Pure additive diff</span></div>
+      <div class="stat-strip-item"><strong>&lt;1e-15</strong><span>Agreement vs reference</span></div>
+      <div class="stat-strip-item"><strong>DMs only</strong><span>No raw-array input</span></div>
+    </div>
+  </div>
+
+  <div class="post-layout">
+    <aside class="post-toc">
+      <div class="toc-title">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#status">Where things stand</a></li>
+        <li><a href="#dispatch">Dispatch, unchanged semantics</a></li>
+        <li><a href="#idreorder">Fixing a limitation instead of shipping it</a></li>
+        <li><a href="#parity">Chasing exact parity</a></li>
+        <li><a href="#verification">Verification</a></li>
+        <li><a href="#next">What's next</a></li>
+      </ul>
+    </aside>
+
+    <article class="post-article">
+      <section id="status">
+        <span class="section-label">Progress</span>
+        <h2>Where things stand</h2>
+        <p>The <a href="gsoc-skbio-gpu-array-api.html">previous update</a> covered making <code>DistanceMatrix</code> itself able to hold a GPU-resident buffer. That's the foundation; it doesn't do anything on its own unless the functions that consume a distance matrix know what to do with one. This update covers the first two: <strong>PERMANOVA</strong> and <strong>Mantel</strong>, opened as <a href="https://github.com/scikit-bio/scikit-bio/pull/2503" target="_blank">PR #2503</a> against the project's development branch.</p>
+        <p>The goal was narrow on purpose: keep the exact semantics both functions already have, and only change <em>where</em> the computation happens based on where the input data lives.</p>
+      </section>
+
+      <section id="dispatch">
+        <span class="section-label">Design</span>
+        <h2>Dispatch, unchanged semantics</h2>
+        <p>Both functions already dispatched on the <code>engine=</code> parameter for CPU execution (Cython or Numba). The new dispatch sits above that: a <code>DistanceMatrix</code> backed by NumPy keeps using the existing engine path untouched; a <code>DistanceMatrix</code> backed by a GPU-resident buffer (PyTorch, JAX, or CuPy) is computed through the Array API instead, so the matrix never has to leave its device.</p>
+        <div class="card-grid">
+          <div class="info-card highlight-card">
+            <h4>DistanceMatrix only</h4>
+            <p>Both functions keep their existing input contract: a <code>DistanceMatrix</code>, nothing else. A bare GPU array is not a valid input, matching the semantics both functions had before this work.</p>
+          </div>
+          <div class="info-card highlight-card">
+            <h4>PERMANOVA</h4>
+            <p>The within-group sum of squares and pseudo-F statistic reduce to a small number of Array API reductions, reusing the same permutation scheme as the reference implementation so p-values match exactly for a given seed.</p>
+          </div>
+          <div class="info-card highlight-card">
+            <h4>Mantel</h4>
+            <p>Pearson and Spearman both have an Array API compute path. Kendall's tau has no such path (SciPy's implementation is host-only), so that variant materializes a GPU-resident matrix to the host and proceeds as before.</p>
+          </div>
+        </div>
+        <p>The whole diff is additive: nothing in the existing NumPy/Cython/Numba code path was touched, only new branches were added ahead of it.</p>
+      </section>
+
+      <section id="idreorder">
+        <span class="section-label">Engineering note</span>
+        <h2>Fixing a limitation instead of shipping it</h2>
+        <p>An early version of this work carried a real limitation: if the two distance matrices passed to <code>mantel</code> had their IDs in a different order, the Array API path raised, instead of reordering them the way the NumPy path already does. That was true when the code was first written, before the DistanceMatrix work landed.</p>
+        <p>Before writing that limitation into the PR description, it was worth checking whether it was still true. It wasn't. The DistanceMatrix work had already made the underlying reorder/filter utilities Array-API aware, which meant the existing id-alignment helper (<code>_order_dms</code>) worked on a GPU-resident matrix without any further changes — it just hadn't been wired back in yet. Wiring it in removed the limitation entirely: id reordering, the strict-subset case, and id lookup/remapping all now behave identically to the NumPy path, verified against a NumPy reference at floating-point precision.</p>
+        <div class="callout green">
+          <p>The smaller lesson generalizes: a documented limitation is a claim, and claims are worth re-checking against the current code before they go into a PR description, not just carried forward from when they were first true.</p>
+        </div>
+      </section>
+
+      <section id="parity">
+        <span class="section-label">Correctness</span>
+        <h2>Chasing exact parity</h2>
+        <p>An independent review of the diff surfaced two gaps between the Array API path and the existing NumPy path, both since fixed:</p>
+        <ul>
+          <li><strong>Near-constant input warning.</strong> The NumPy Mantel path warns when one of the two distance vectors is close enough to constant that the Pearson/Spearman correlation becomes numerically unstable. The Array API path computed the same correlation but skipped the warning. Fixed by adding the same threshold check, verified to fire identically on both paths for near-constant input.</li>
+          <li><strong>Untested tie-handling.</strong> The existing test suite for the Array API path used continuous random distances, which never produce ties — so the average-rank tie-breaking logic in the Spearman path had no test exercising its non-trivial branch. Added a test using integer-valued distances specifically to force ties, comparing the result against the NumPy path at multiple points.</li>
+        </ul>
+        <p>Both are now covered, and the Array API results match the existing implementation to floating-point precision across sizes and backends.</p>
+      </section>
+
+      <section id="verification">
+        <span class="section-label">Proof</span>
+        <h2>Verification</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>Where</th><th>What ran</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-em">NumPy</td><td>Full existing PERMANOVA + Mantel test suites</td><td>Unchanged, all passing</td></tr>
+            <tr><td class="td-em">PyTorch (CPU)</td><td>New Array API test classes, incl. id-reordering and tie handling</td><td>All passing</td></tr>
+            <tr><td class="td-em">AMD Instinct MI210 (ROCm)</td><td>Same Array API test classes, on real GPU hardware</td><td>PERMANOVA pseudo-F and Mantel Pearson/Spearman r and p-values match the NumPy result to floating-point precision, including id-reordering happening on the GPU-resident buffer</td></tr>
+          </tbody>
+        </table>
+        <p>The MI210 run is the one that matters most: it's the same code path a user would hit by constructing a <code>DistanceMatrix</code> directly on a GPU and calling <code>permanova</code> or <code>mantel</code> on it, not a simulated stand-in.</p>
+      </section>
+
+      <section id="next">
+        <span class="section-label">Ahead</span>
+        <h2>What's next</h2>
+        <p>This closes out the first-pass GPU support for PERMANOVA and Mantel — correctness first, matching Igor's stated priority that speed is secondary at this stage. Two things are explicitly deferred as performance follow-ups rather than correctness gaps: each Monte-Carlo permutation currently does a small host-to-device transfer inside the loop, and the Spearman path does a one-time host-side assembly of the ranked matrix. Both are candidates for the next phase of work, alongside the Numba <code>@cuda.jit</code>/<code>@hip.jit</code> kernel backend that the project's roadmap targets for squeezing out real GPU performance rather than just GPU correctness. Distance-matrix class polish (including condensed-form support on GPU) is queued in parallel.</p>
+        <div class="callout amber">
+          <p>Correctness first, then speed — the same order the CPU phase followed, now repeating on the GPU side.</p>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <nav class="post-footer-nav">
+    <a href="gsoc-skbio-gpu-array-api.html" class="btn-ghost">← Previous update</a>
+    <a href="index.html" class="btn-ghost">All Posts →</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <strong>Abid Khan</strong>
+      <span class="footer-muted">Builder, Operator, Shipper</span>
+    </div>
+    <div class="footer-links">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">Blog</a>
+      <a href="https://github.com/LarytheLord" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

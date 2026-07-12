@@ -406,12 +406,12 @@
               <p class="case-kicker">Scientific Python · GSoC 2026, in progress</p>
               <h3>Numba + GPU performance kernels for scikit-bio</h3>
               <div class="system-line">Numba CPU (merged) → GPU-resident Array API → CUDA / ROCm kernels</div>
-              <p>Replaced performance-critical Cython paths in scikit-bio with a Numba CPU engine, now merged to <code>main</code>. Current work makes the distance-matrix classes GPU-capable through the Array API, so data that already lives on a GPU stays there through PERMANOVA and Mantel — verified with the same source running correctly on both NVIDIA and AMD hardware.</p>
-              <div class="case-meta"><div><strong>Merged</strong><span>Numba CPU engine</span></div><div><strong>NVIDIA + AMD</strong><span>Same source, verified</span></div><div><strong>&lt;1e-15</strong><span>Numerical agreement</span></div></div>
+              <p>Replaced performance-critical Cython paths in scikit-bio with a Numba CPU engine, now merged to <code>main</code>. The distance-matrix classes are now GPU-capable through the Array API (merged), and PERMANOVA and Mantel dispatch on top of that to compute on a GPU-resident matrix with the same semantics as the NumPy path (in review) — verified with the same source running correctly on both NVIDIA and AMD hardware.</p>
+              <div class="case-meta"><div><strong>Merged</strong><span>Numba CPU + GPU DistanceMatrix</span></div><div><strong>NVIDIA + AMD</strong><span>Same source, verified</span></div><div><strong>&lt;1e-15</strong><span>Numerical agreement</span></div></div>
               <span class="stamp" style="margin-top: 4px;">Hardware verified, not just simulated</span>
               <div class="tag-row"><span class="tag">Numba</span><span class="tag">CUDA</span><span class="tag">ROCm</span><span class="tag">Array API</span><span class="tag">Bioinformatics</span></div>
             </div>
-            <div class="link-row"><a class="link-chip" href="blog/gsoc-skbio-gpu-array-api.html">Read GPU progress update</a><a class="link-chip" href="blog/gsoc-scikit-bio-numba.html">Read GSoC announcement</a><a class="link-chip" href="https://github.com/scikit-bio/scikit-bio" target="_blank" rel="noreferrer">scikit-bio</a></div>
+            <div class="link-row"><a class="link-chip" href="blog/gsoc-skbio-permanova-mantel-gpu.html">Read latest progress update</a><a class="link-chip" href="blog/gsoc-skbio-gpu-array-api.html">Read GPU DistanceMatrix update</a><a class="link-chip" href="https://github.com/scikit-bio/scikit-bio" target="_blank" rel="noreferrer">scikit-bio</a></div>
           </article>
 
           <article class="case fade-in">
@@ -490,12 +490,16 @@
 at n=25,000 / 9,999 permutations
 Accuracy: max abs diff &lt; 1e-15 vs Cython
 
-GPU cross-vendor verification (same source)
-NVIDIA RTX 4060 .......... matches reference
-AMD Instinct MI210 ....... matches reference
-AMD Instinct MI300 ....... matches reference
+GPU-resident DistanceMatrix (merged, PR #2499)
+PERMANOVA + Mantel on the Array API (in review, PR #2503)
+NVIDIA RTX 4060 (CuPy) .......... matches reference
+AMD Instinct MI210 (PyTorch) .... matches reference
 
-dispatch: Numba CPU -> Numba CUDA/HIP -> Array API fallback</pre>
+Separate GPU kernel spike, not yet a PR:
+same PERMANOVA kernel source ran correct
+on RTX 4060, MI210, and MI300X
+
+dispatch: Numba CPU -> Array API (shipped) -> Numba CUDA/HIP (next)</pre>
           </article>
         </div>
       </div>
@@ -514,7 +518,8 @@ dispatch: Numba CPU -> Numba CUDA/HIP -> Array API fallback</pre>
           <article class="panel fade-in">
             <h3>Recent public PRs</h3>
             <div class="role-list">
-              <div class="role-item"><div><h3>scikit-bio: GPU-capable DistanceMatrix</h3><p>Array API support so DistanceMatrix can hold a GPU-resident buffer, verified on an AMD Instinct MI210.</p></div><a class="status open" href="https://github.com/scikit-bio/scikit-bio/pull/2499" target="_blank" rel="noreferrer">In review</a></div>
+              <div class="role-item"><div><h3>scikit-bio: GPU-capable DistanceMatrix</h3><p>Array API support so DistanceMatrix can hold a GPU-resident buffer, verified on an AMD Instinct MI210.</p></div><a class="status" href="https://github.com/scikit-bio/scikit-bio/pull/2499" target="_blank" rel="noreferrer">Merged</a></div>
+              <div class="role-item"><div><h3>scikit-bio: GPU support for PERMANOVA & Mantel</h3><p>Array API compute path for both statistics on a GPU-resident matrix, same semantics as NumPy, verified on an AMD Instinct MI210.</p></div><a class="status open" href="https://github.com/scikit-bio/scikit-bio/pull/2503" target="_blank" rel="noreferrer">In review</a></div>
               <div class="role-item"><div><h3>desloppify intelligence gate</h3><p>De-hallucination gate for API veracity in Open Paws AI workflows.</p></div><a class="status" href="https://github.com/Open-Paws/desloppify/pull/36" target="_blank" rel="noreferrer">Merged</a></div>
               <div class="role-item"><div><h3>Adventurers Guild security</h3><p>TLS production guard, PII log removal, and URL sanitization.</p></div><a class="status open" href="https://github.com/LarytheLord/Adventurers-Guild/pull/215" target="_blank" rel="noreferrer">Open</a></div>
               <div class="role-item"><div><h3>Knight Medicare readiness</h3><p>Security hardening and backend production enhancements.</p></div><a class="status open" href="https://github.com/LarytheLord/knight-medicare/pull/206" target="_blank" rel="noreferrer">Open</a></div>
@@ -524,7 +529,7 @@ dispatch: Numba CPU -> Numba CUDA/HIP -> Array API fallback</pre>
           <article class="panel fade-in">
             <h3>Current roles</h3>
             <div class="role-list">
-              <div class="role-item"><div><h3>GSoC Contributor</h3><p>NumFOCUS / scikit-bio. CPU Numba engine merged, now shipping GPU support.</p></div><span class="status">In progress</span></div>
+              <div class="role-item"><div><h3>GSoC Contributor</h3><p>NumFOCUS / scikit-bio. CPU Numba engine and GPU-resident DistanceMatrix merged; PERMANOVA/Mantel GPU support in review.</p></div><span class="status">In progress</span></div>
               <div class="role-item"><div><h3>Rapid Impact Developer</h3><p>Open Paws AI tooling for animal advocacy and campaign workflows.</p></div><span class="status">Active</span></div>
               <div class="role-item"><div><h3>CTO & Co-Founder</h3><p>Knight Medicare, building clinical AI and backend infrastructure.</p></div><span class="status open">Building</span></div>
               <div class="role-item"><div><h3>Google Gemini Campus Ambassador</h3><p>Representing Gemini and AI education on campus.</p></div><span class="status">Campus</span></div>
@@ -547,21 +552,22 @@ dispatch: Numba CPU -> Numba CUDA/HIP -> Array API fallback</pre>
           <article class="blog-feature fade-in">
             <div>
               <p class="blog-label">Featured technical note</p>
-              <h3>Making scikit-bio's Distance Matrices GPU-Capable</h3>
-              <p>The current phase of the GSoC project: a GPU-resident distance matrix flowing through PERMANOVA and Mantel via the Array API, with the same source verified correct on both NVIDIA and AMD hardware.</p>
+              <h3>GPU Support Lands for PERMANOVA and Mantel</h3>
+              <p>The current phase of the GSoC project: PERMANOVA and Mantel dispatch on where a distance matrix lives, computing through the Array API on a GPU-resident matrix with the same semantics as the NumPy path — verified correct on both NVIDIA and AMD hardware.</p>
               <div class="blog-proof-row">
-                <span class="blog-proof">CPU engine merged</span>
-                <span class="blog-proof">NVIDIA + 2x AMD verified</span>
+                <span class="blog-proof">DistanceMatrix GPU support merged</span>
+                <span class="blog-proof">NVIDIA + AMD verified</span>
                 <span class="blog-proof">&lt;1e-15 agreement</span>
                 <span class="blog-proof">Array API</span>
               </div>
             </div>
             <div class="blog-cta-row">
-              <a class="btn btn-primary" href="blog/gsoc-skbio-gpu-array-api.html">Read the GPU progress update</a>
+              <a class="btn btn-primary" href="blog/gsoc-skbio-permanova-mantel-gpu.html">Read the latest progress update</a>
               <a class="btn btn-secondary" href="blog/index.html">Open all writing</a>
             </div>
           </article>
           <div class="blog-stack">
+            <a class="blog-mini fade-in" href="blog/gsoc-skbio-gpu-array-api.html"><span>GSoC 2026</span><h3>Making Distance Matrices GPU-Capable</h3><p>The foundation this builds on: how DistanceMatrix learned to hold a GPU-resident buffer, merged as PR #2499.</p></a>
             <a class="blog-mini fade-in" href="blog/gsoc-scikit-bio-numba.html"><span>GSoC 2026</span><h3>The GSoC Announcement</h3><p>Why Cython is fast but GPU-blind, how Numba fits the dispatch architecture, and the May/June progress that got the CPU engine merged.</p></a>
             <a class="blog-mini fade-in" href="blog/oss-contributions.html"><span>Open Source</span><h3>Selected OSS Contributions</h3><p>Reviewer-approved work across scientific Python, sustainability tooling, developer infrastructure, and Open Paws repos.</p></a>
             <a class="blog-mini fade-in" href="blog/recent-github-work.html"><span>GitHub Trail</span><h3>Recent GitHub Work</h3><p>Public PRs around AI reliability, security hardening, and production readiness.</p></a>
