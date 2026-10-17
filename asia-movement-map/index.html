@@ -94,9 +94,26 @@ nav.tabs{position:sticky}
 @media (hover:hover){.fixbtn{opacity:0}.note:hover .fixbtn,.note:focus-within .fixbtn,.fixbtn:focus-visible{opacity:1}}
 .tagbtn{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;background:var(--marker-soft);color:var(--ink);margin:2px 4px 2px 0;border:1px solid transparent;cursor:pointer}
 .tagbtn:hover{border-color:var(--marker)}
-.net.themefocus .nd.org .lbl-org{display:none!important}
 .linkbtn{font:inherit;font-size:13px;background:none;border:0;color:var(--marker);text-decoration:underline;cursor:pointer;padding:4px 0}
 @media print{nav.tabs,.fixbtn,.controls,.seg,.findme,dialog,.skip{display:none!important}section.panel[hidden]{display:block!important}body{padding:0}.note{box-shadow:none;border:1px solid #ccc}}
+
+:root{--w1:#eef0f5;--w2:#cfd4e1;--w3:#98a1ba;--w4:#5f6b8c;--w5:#2f3a5a;--g1:#f4eefb;--g2:#dccbf2;--g3:#b896e3;--g4:#8a5bc8;--g5:#5b2a96}
+table.mx{border-collapse:separate;border-spacing:3px;width:100%;min-width:760px;font-size:13px}
+table.mx th{text-align:left;padding:6px 8px;color:var(--ink-2);font-weight:600;vertical-align:bottom}
+table.mx thead th.rg{text-align:center;font-family:var(--f-display);font-size:14px;color:var(--ink);border-bottom:1px solid var(--rule)}
+table.mx thead th.rg .conf{font-family:var(--f-body);font-weight:400}
+table.mx thead th.sub{text-align:center;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+table.mx thead th.sub i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+table.mx tbody th{color:var(--ink);font-weight:600;min-width:210px;position:sticky;left:0;background:var(--bg);z-index:1}
+table.mx td{padding:0;text-align:center}
+table.mx td.sep{border-left:2px solid var(--rule)}
+table.mx td button{font:inherit;border:0;display:block;width:100%;min-width:46px;height:36px;border-radius:4px;font-family:var(--f-mono);font-size:13px;font-weight:600;cursor:pointer}
+table.mx td button[disabled]{cursor:default;font-weight:400;color:var(--ink-3);background:#fafbfc}
+table.mx td button:not([disabled]):hover{outline:2px solid var(--marker);outline-offset:1px}
+table.mx td button:focus-visible{outline:3px solid var(--marker);outline-offset:1px}
+.mx-legend{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:13px;color:var(--ink-2)}
+.mx-legend .ramp{display:inline-flex;gap:2px;vertical-align:middle;margin:0 6px}
+.mx-legend .ramp i{width:18px;height:12px;border-radius:2px;display:inline-block}
 main{display:block}
 main:focus{outline:none}
 section.panel{padding-block:26px 8px;display:grid;gap:18px}
@@ -137,26 +154,34 @@ section.panel{padding-block:26px 8px;display:grid;gap:18px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;color:var(--ink-2)}
 .status{font-size:13px;color:var(--ink-2)}
 
-.net{border:1px solid var(--rule);border-radius:4px;display:grid;grid-template-columns:minmax(0,1fr) 310px;background:var(--bg)}
-.net-stage{position:relative;min-width:0;border-right:1px solid var(--rule);touch-action:none;background:var(--panel)}
-.net-stage svg{width:100%;height:auto;display:block;cursor:grab}
-.net-stage svg.dragging{cursor:grabbing}
+.net{border:1px solid var(--rule);border-radius:6px;background:var(--bg);display:grid}
+.net-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--rule);background:var(--panel)}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:14px}
+.crumbs button{font:inherit;font-weight:600;background:none;border:0;color:var(--marker);cursor:pointer;padding:6px 4px;text-decoration:underline}
+.crumbs span.cur{font-weight:700;color:var(--ink);padding:6px 4px}
+.crumbs .sep{color:var(--ink-3)}
+.net-tools{display:flex;flex-wrap:wrap;gap:6px}
+.net-tools .pill{min-height:36px;padding:5px 11px;font-size:13px}
+.net-find input{font:inherit;font-size:14px;padding:7px 10px;border:1.5px solid var(--rule-strong);border-radius:8px;min-height:38px;width:220px;max-width:100%}
+.net-body{display:grid;grid-template-columns:minmax(0,1fr) 300px}
+.net-stage{min-width:0;border-right:1px solid var(--rule);background:var(--bg)}
+.net-stage svg{width:100%;height:auto;display:block}
 .net-side{padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
-.net-tools{display:flex;flex-wrap:wrap;gap:6px;padding:10px 10px 0}
 .nd{cursor:pointer}
 .nd:focus{outline:none}
-.nd:focus-visible .ring{stroke:var(--ink);stroke-width:3}
-.nd text{font-family:var(--f-body);font-size:11px;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3.5px;stroke-linejoin:round;pointer-events:none}
-.nd.theme text{font-family:var(--f-display);font-weight:700;font-size:13px}
-.ed{stroke:#8a90a3;stroke-opacity:.45;stroke-width:1}
-.ed.inf{stroke-dasharray:3 3}
-.net.focus .ed{stroke-opacity:.07}
-.net.focus .ed.on{stroke-opacity:1;stroke:var(--marker);stroke-width:1.8}
-.net.focus .nd{opacity:.2}
-.net.focus .nd.on{opacity:1}
-.nd .lbl-org{display:none}
-.net.focus .nd.on .lbl-org,.nd:hover .lbl-org,.nd:focus-visible .lbl-org{display:block}
-@media (max-width:900px){.net{grid-template-columns:1fr}.net-stage{border-right:0;border-bottom:1px solid var(--rule)}}
+.nd:focus-visible .hit{stroke:var(--marker);stroke-width:3}
+.nd:hover .hit{stroke:var(--marker)}
+.nd text{font-family:var(--f-body);fill:var(--ink);pointer-events:none}
+.nd .tl{font-family:var(--f-display);font-weight:700}
+.nd .sub{fill:var(--ink-2)}
+.lk{stroke:#9aa1b4;stroke-width:1.4}
+.lk.inf{stroke-dasharray:4 4}
+.lk.peer{stroke:#c9cdd8;stroke-width:1}
+@media (prefers-reduced-motion:no-preference){#netSvg g.layer{animation:netfade .25s ease}}
+@keyframes netfade{from{opacity:0}to{opacity:1}}
+.netlist{display:grid;gap:10px;padding:14px}
+.netlist .pill{justify-content:space-between;width:100%;text-align:left}
+@media (max-width:900px){.net-body{grid-template-columns:1fr}.net-stage{border-right:0;border-bottom:1px solid var(--rule)}}
 
 .conn{border:1px solid var(--rule);border-radius:4px}
 .conn-head,.conn-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) 28px;align-items:center;gap:12px}
@@ -306,10 +331,17 @@ dialog.fix .top{display:flex;justify-content:space-between;align-items:center;ga
   <p class="muted prose">Every organisation written on a board, with what the notes say, a short public profile, and the gaps its work could help with. Spot a mistake about your group? Use "Suggest a correction" on its card.</p></div>
   <div class="seg" role="group" aria-label="View" id="orgView"><button class="pill" type="button" data-v="list" aria-pressed="true">List</button><button class="pill" type="button" data-v="net" aria-pressed="false">Network map</button></div>
   <div id="netView" hidden>
-    <p class="muted small prose">Each dot is an organisation, coloured by region, joined to the themes it works on. A solid line comes from the group's own note; a dashed line comes from its public profile. Select a dot or a theme to see what it connects to.</p>
+    <p class="muted prose">Start with the themes. Select a theme to see every group working on it, then select a group to see its themes and the groups it shares them with.</p>
     <div class="net" id="net">
-      <div class="net-stage"><div class="net-tools" id="netTools" role="group" aria-label="Show regions"></div><svg id="netSvg" role="group" aria-label="Network of organisations and themes. Each node is a button."></svg></div>
-      <aside class="net-side" id="netSide" aria-live="polite"></aside>
+      <div class="net-bar">
+        <nav class="crumbs" id="netCrumbs" aria-label="Map position"></nav>
+        <div class="net-tools" id="netTools" role="group" aria-label="Show regions"></div>
+        <div class="net-find"><label class="sr" for="netFind">Jump to a group</label><input id="netFind" type="search" list="netOrgList" placeholder="Jump to a group" autocomplete="off"><datalist id="netOrgList"></datalist></div>
+      </div>
+      <div class="net-body">
+        <div class="net-stage" id="netStage"><svg id="netSvg" role="group" aria-label="Map of themes and organisations"></svg><div id="netList"></div></div>
+        <aside class="net-side" id="netSide" aria-live="polite"></aside>
+      </div>
     </div>
   </div>
   <div id="listView">
@@ -328,14 +360,15 @@ dialog.fix .top{display:flex;justify-content:space-between;align-items:center;ga
 <section class="panel" id="p-findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
   <div class="sec-head"><h2>What the boards say together</h2></div>
   <div class="tiles" id="tiles"></div>
+  <div class="sec-head" style="margin-top:6px"><h2>Themes by region</h2>
+  <p class="muted" style="max-width:78ch">Each row is a theme. For each board, the <span class="key"><i style="background:var(--w4)"></i>Work</span> column counts Current Work notes and the <span class="key"><i style="background:var(--g4)"></i>Gaps</span> column counts notes from the three gap columns. Darker means more notes. Select a number to read the notes behind it.</p>
+  <div class="seg" role="group" aria-label="Count" id="ttMode"><button class="pill" type="button" data-m="wrote" aria-pressed="true">What participants wrote</button><button class="pill" type="button" data-m="all" aria-pressed="false">Including public profiles</button></div></div>
+  <div class="mx-legend" id="mxLegend"></div>
+  <div class="tt-wrap"><table class="mx" id="tt"></table></div>
+  <div class="drawer" id="drawer" hidden tabindex="-1"><div class="drawer-head"><h3 id="drawerTitle"></h3><button class="btn" id="drawerClose" type="button">Close</button></div><div class="notes" id="drawerNotes"></div></div>
   <div class="cards" id="findingsList"></div>
   <div class="sec-head" style="margin-top:8px"><h2>Needs named on more than one board</h2><p class="muted prose">The same need, in each region's own words. A blank means nobody at that table wrote it down.</p></div>
   <div style="display:grid;gap:10px" id="bottList"></div>
-  <div class="sec-head" style="margin-top:8px"><h2>Themes by region</h2>
-  <p class="muted" style="max-width:75ch">How many notes touch each theme. <span class="key"><i style="background:var(--work)"></i>Work</span> counts Current Work notes. <span class="key"><i style="background:var(--gap)"></i>Gaps</span> counts notes from the three gap columns. Select a bar to read its notes.</p>
-  <div class="seg" role="group" aria-label="Count" id="ttMode"><button class="pill" type="button" data-m="wrote" aria-pressed="true">What participants wrote</button><button class="pill" type="button" data-m="all" aria-pressed="false">Including public profiles</button></div></div>
-  <div class="tt-wrap"><table class="tt" id="tt"></table></div>
-  <div class="drawer" id="drawer" hidden tabindex="-1"><div class="drawer-head"><h3 id="drawerTitle"></h3><button class="btn" id="drawerClose" type="button">Close</button></div><div class="notes" id="drawerNotes"></div></div>
 </section>
 
 <section class="panel" id="p-about" role="tabpanel" aria-labelledby="tab-about" hidden>
@@ -541,23 +574,30 @@ $("#tiles").innerHTML = DATA.headlines.map(h => `<div class="tile"><span><span c
 $("#findingsList").innerHTML = DATA.findings.map(f => `<article class="card"><h3>${esc(f.title)}</h3><p>${esc(f.body)}</p>${f.evidence ? `<p class="ev">${esc(f.evidence)}</p>` : ""}<div class="regs">${regDots(f.regions || [])}</div></article>`).join("");
 $("#bottList").innerHTML = DATA.bottlenecks.map(b => `<div class="brow"><div><h3>${esc(b.name)}</h3><p class="small muted">${esc(b.note || "")}</p></div>${REG.map(r => { const ids = b.ids.filter(id => noteBy[id].region === r.key); return `<div class="cell"><span class="hdr">${dot(r.key)}${esc(r.name)}</span>${ids.length ? ids.map(id => `<span class="q">${esc(noteBy[id].text)}</span>`).join("") : `<span class="none">Not written on this board</span>`}</div>`; }).join("")}</div>`).join("");
 let cnt = {}, ttMode = "wrote";
+const W_RAMP = ["--w1","--w2","--w3","--w4","--w5"], G_RAMP = ["--g1","--g2","--g3","--g4","--g5"];
 function renderTT() {
   cnt = {}; let maxN = 1;
   const has = (n, k) => n.themes.includes(k) && (ttMode === "all" || !(n.themes_inferred || []).includes(k));
   for (const t of DATA.themes) for (const rk of REG.map(r => r.key).concat(["all"])) for (const side of ["w", "g"]) {
     const ids = notes.filter(n => (rk === "all" || n.region === rk) && has(n, t.key) && ((side === "w") === (n.column === "current_work"))).map(n => n.id);
-    cnt[`${t.key}|${rk}|${side}`] = ids; maxN = Math.max(maxN, ids.length);
+    cnt[`${t.key}|${rk}|${side}`] = ids; if (rk !== "all") maxN = Math.max(maxN, ids.length);
   }
-  const bar = (k, side, label) => { const n = cnt[k + "|" + side].length; return `<button class="bar ${side}" type="button" data-k="${k}|${side}" ${n ? "" : "disabled"} aria-label="${esc(label)}, ${side === "w" ? "work" : "gaps"}: ${pl(n, "note")}"><span class="num">${n}</span><span class="fill" style="width:${n ? Math.max(5, n / maxN * 100) : 0}%"></span></button>`; };
+  const maxAll = Math.max(1, ...DATA.themes.map(t => Math.max(cnt[`${t.key}|all|w`].length, cnt[`${t.key}|all|g`].length)));
+  const step = (n, max) => n === 0 ? -1 : Math.min(4, Math.floor((n - 1) / Math.max(1, max) * 5));
+  const cell = (k, side, label, max, sep) => { const n = cnt[k + "|" + side].length, s = step(n, max), ramp = side === "w" ? W_RAMP : G_RAMP;
+    return `<td${sep ? ' class="sep"' : ""}><button type="button" data-k="${k}|${side}" ${n ? "" : "disabled"} style="${n ? `background:var(${ramp[s]});color:${s >= 3 ? "#fff" : "var(--ink)"}` : ""}" aria-label="${esc(label)}, ${side === "w" ? "work" : "gaps"}: ${pl(n, "note")}">${n}</button></td>`; };
   const tot = rk => { const ns = notes.filter(n => rk === "all" || n.region === rk); return `${ns.filter(n => n.column === "current_work").length} work, ${ns.filter(n => n.column !== "current_work").length} gap notes`; };
-  $("#tt").innerHTML = `<thead><tr><th scope="col">Theme</th>${REG.map(r => `<th scope="col"><span class="reg">${dot(r.key)}${esc(r.name)}</span><div class="conf">${tot(r.key)}</div></th>`).join("")}<th scope="col">All three boards<div class="conf">${tot("all")}</div></th></tr></thead><tbody>` +
-    DATA.themes.filter(t => ttMode === "all" || t.key !== "unstated").map(t => { const g = cnt[`${t.key}|all|g`].length, w = cnt[`${t.key}|all|w`].length; return `<tr><th scope="row">${esc(t.name)}${g > w ? `<span class="flag">more gaps than work</span>` : ""}</th>${REG.map(r => `<td><div class="bars">${bar(t.key + "|" + r.key, "w", t.name + ", " + r.name)}${bar(t.key + "|" + r.key, "g", t.name + ", " + r.name)}</div></td>`).join("")}<td class="all"><div class="bars">${bar(t.key + "|all", "w", t.name + ", all boards")}${bar(t.key + "|all", "g", t.name + ", all boards")}</div></td></tr>`; }).join("") + `</tbody>`;
+  const sub = `<th class="sub"><i style="background:var(--w4)"></i>Work</th><th class="sub"><i style="background:var(--g4)"></i>Gaps</th>`;
+  $("#tt").innerHTML = `<thead><tr><th></th>${REG.map(r => `<th class="rg" colspan="2"><span class="reg">${dot(r.key)}${esc(r.name)}</span><div class="conf">${tot(r.key)}</div></th>`).join("")}<th class="rg" colspan="2">All three boards<div class="conf">${tot("all")}</div></th></tr><tr><th class="sub" style="text-align:left">Theme</th>${sub.repeat(4)}</tr></thead><tbody>` +
+    DATA.themes.filter(t => ttMode === "all" || t.key !== "unstated").map(t => { const g = cnt[`${t.key}|all|g`].length, w = cnt[`${t.key}|all|w`].length;
+      return `<tr><th scope="row">${esc(t.name)}${g > w ? `<span class="flag">more gaps than work</span>` : ""}</th>${REG.map(r => cell(t.key + "|" + r.key, "w", t.name + ", " + r.name, maxN, true) + cell(t.key + "|" + r.key, "g", t.name + ", " + r.name, maxN)).join("")}${cell(t.key + "|all", "w", t.name + ", all boards", maxAll, true)}${cell(t.key + "|all", "g", t.name + ", all boards", maxAll)}</tr>`; }).join("") + `</tbody>`;
+  $("#mxLegend").innerHTML = `<span>Work<span class="ramp">${W_RAMP.map(v => `<i style="background:var(${v})"></i>`).join("")}</span>fewer to more</span><span>Gaps<span class="ramp">${G_RAMP.map(v => `<i style="background:var(${v})"></i>`).join("")}</span>fewer to more</span><span>Region columns share one scale; "All three boards" has its own.</span>`;
 }
 renderTT();
 $("#ttMode").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; ttMode = b.dataset.m; $("#ttMode").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); $("#drawer").hidden = true; renderTT(); });
 let lastBar = null;
 $("#tt").addEventListener("click", e => {
-  const b = e.target.closest(".bar"); if (!b || b.disabled) return; lastBar = b;
+  const b = e.target.closest("button[data-k]"); if (!b || b.disabled) return; lastBar = b;
   const [tk, rk, side] = b.dataset.k.split("|"), ids = cnt[b.dataset.k];
   $("#drawerTitle").textContent = `${THEME[tk].name}, ${rk === "all" ? "all boards" : regBy[rk].name}: ${side === "w" ? "work" : "gaps"} (${pl(ids.length, "note")})`;
   $("#drawerNotes").innerHTML = ids.map(id => noteHTML(noteBy[id])).join("");
@@ -574,80 +614,103 @@ $("#nextList").innerHTML = DATA.next.map(n => `<article class="card"><h3>${esc(n
 $("#footCredit").innerHTML = DATA.meta.footer_html;
 $("#footNote").textContent = DATA.meta.footnote;
 
-// network: themes pinned on a ring, organisations settle inside
-let netDone = false;
+// network map: three levels, each fully labelled (all themes > one theme > one group)
+let netDone = false; const net = {view: "all", key: null, theme: null, regions: new Set(REG.map(r => r.key))};
+const netOrgs = () => orgs.filter(o => o.themes.length && o.regions.some(k => net.regions.has(k)));
+const themeOrgs = k => netOrgs().filter(o => o.themes.includes(k));
+const wrap = (s, n) => { const w = s.split(" "), out = [""]; w.forEach(x => { if ((out[out.length - 1] + " " + x).trim().length > n && out[out.length - 1]) out.push(x); else out[out.length - 1] = (out[out.length - 1] + " " + x).trim(); }); return out; };
+const short = (s, n) => s.length > n ? s.slice(0, n - 1).trim() + "..." : s;
 function netInit() {
-  if (netDone) return; netDone = true;
-  const svg = $("#netSvg"), side = $("#netSide"), NS = "http://www.w3.org/2000/svg", W = 1060, H = 640;
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  const RING = ["corporate","neglected","aquatic","supply","research","talent","cohesion","funding","culture","awareness","health","plantbased","hospitality","policy"];
-  const ring = RING.filter(k => themeKeys.includes(k)).concat(themeKeys.filter(k => !RING.includes(k)));
-  const nodes = [], edges = [], idx = {};
-  ring.forEach((k, i) => { const a = -Math.PI / 2 + i / ring.length * Math.PI * 2; const n = {id: "t:" + k, kind: "theme", key: k, label: THEME[k].name, a, r: 8 + Math.sqrt(orgs.filter(o => o.themes.includes(k)).length) * 2, x: W / 2 + Math.cos(a) * 300, y: H / 2 + 8 + Math.sin(a) * 238, vx: 0, vy: 0, fixed: true}; idx[n.id] = nodes.length; nodes.push(n); });
-  orgs.forEach((o, i) => { const a = i * 2.39996, rr = 30 + 200 * Math.sqrt((i + .5) / orgs.length); const n = {id: "o:" + o.name, kind: "org", org: o, label: o.name, r: o.regions.length > 1 ? 7 : 5.5, x: W / 2 + Math.cos(a) * rr, y: H / 2 + Math.sin(a) * rr * .72, vx: 0, vy: 0}; idx[n.id] = nodes.length; nodes.push(n);
-    o.themes.forEach(k => { if (idx["t:" + k] != null) edges.push({s: idx[n.id], t: idx["t:" + k], inf: !o.themes_direct.includes(k)}); }); });
-  function tick(alpha) {
-    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
-      const a = nodes[i], b = nodes[j]; if (a.fixed && b.fixed) continue;
-      let dx = b.x - a.x, dy = b.y - a.y; const d2 = dx * dx + dy * dy || .01, d = Math.sqrt(d2); dx /= d; dy /= d;
-      const f = 480 * alpha / d2, minD = a.r + b.r + 9;
-      if (!a.fixed) { a.vx -= dx * f; a.vy -= dy * f; } if (!b.fixed) { b.vx += dx * f; b.vy += dy * f; }
-      if (d < minD) { const push = (minD - d) / (a.fixed || b.fixed ? 1 : 2); if (!a.fixed) { a.x -= dx * push; a.y -= dy * push; } if (!b.fixed) { b.x += dx * push; b.y += dy * push; } }
-    }
-    for (const e of edges) { const a = nodes[e.s], b = nodes[e.t], dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || .01, k = (d - 55) * .022 * alpha; a.vx += dx / d * k; a.vy += dy / d * k; }
-    for (const n of nodes) { if (n.fixed) continue; n.vx += (W / 2 - n.x) * .005 * alpha; n.vy += (H / 2 - n.y) * .007 * alpha; n.x += n.vx; n.y += n.vy; n.vx *= .55; n.vy *= .55; n.x = Math.max(250, Math.min(W - 250, n.x)); n.y = Math.max(70, Math.min(H - 60, n.y)); }
+  if (!netDone) {
+    netDone = true;
+    $("#netTools").innerHTML = REG.map(r => `<button class="pill" type="button" data-r="${r.key}" aria-pressed="true">${dot(r.key)}${esc(r.name)}</button>`).join("");
+    $("#netTools").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const k = b.dataset.r; if (net.regions.has(k) && net.regions.size > 1) net.regions.delete(k); else net.regions.add(k); $("#netTools").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(net.regions.has(x.dataset.r)))); netRender(); });
+    $("#netOrgList").innerHTML = orgs.filter(o => o.themes.length).map(o => `<option value="${esc(o.name)}"></option>`).join("");
+    $("#netFind").addEventListener("change", e => { const v = e.target.value; if (orgBy[v] && orgBy[v].themes.length) { netGo("org", v); e.target.value = ""; } });
+    $("#netFind").addEventListener("input", e => { const v = e.target.value; if (orgBy[v] && orgBy[v].themes.length) { netGo("org", v); e.target.value = ""; } });
+    document.addEventListener("click", e => { const n = e.target.closest("[data-net]"); if (!n) return; const [v, ...k] = n.dataset.net.split(":"); netGo(v, k.join(":")); });
+    document.addEventListener("keydown", e => { const n = e.target.closest && e.target.closest(".nd[data-net]"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); n.dispatchEvent(new MouseEvent("click", {bubbles: true})); } });
+    let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (!$("#netView").hidden) netRender(); }, 150); });
   }
-  for (let i = 0; i < 380; i++) tick(1 - i / 420);
-  const gE = document.createElementNS(NS, "g"), gN = document.createElementNS(NS, "g"); svg.append(gE, gN);
-  const eEls = edges.map(e => { const l = document.createElementNS(NS, "line"); l.setAttribute("class", "ed" + (e.inf ? " inf" : "")); gE.append(l); return l; });
-  const nEls = nodes.map(n => {
-    const g = document.createElementNS(NS, "g"); g.setAttribute("class", "nd " + n.kind + (n.kind === "org" && n.org.regions.length > 1 ? " multi" : "")); g.setAttribute("tabindex", "0"); g.setAttribute("role", "button");
-    g.setAttribute("aria-label", n.kind === "theme" ? `Theme: ${n.label}` : `${n.label}, ${n.org.regions.map(k => regBy[k].name).join(" and ")}`);
-    if (n.kind === "theme") { const cx = Math.cos(n.a), cy = Math.sin(n.a), anchor = Math.abs(cx) < .3 ? "middle" : (cx > 0 ? "start" : "end"); const lx = anchor === "middle" ? 0 : Math.sign(cx) * (n.r + 6), ly = anchor === "middle" ? (cy < 0 ? -n.r - 7 : n.r + 16) : 4;
-      g.innerHTML = `<circle class="ring" r="${n.r}" fill="var(--marker-soft)" stroke="var(--marker)" stroke-width="2"/><text text-anchor="${anchor}" x="${lx}" y="${ly}">${esc(n.label)}</text>`; }
-    else { const rs = n.org.regions; g.innerHTML = (rs.length > 1 ? `<circle r="${n.r + 3.5}" fill="none" stroke="${regBy[rs[1]].color}" stroke-width="2.5"/>` : "") + `<circle class="ring" r="${n.r}" fill="${regBy[rs[0]].color}" stroke="#fff" stroke-width="1.5"/><text class="lbl-org" x="${n.r + 4}" y="4">${esc(n.label.length > 34 ? n.label.slice(0, 32) + "..." : n.label)}</text>`; }
-    gN.append(g); return g;
-  });
-  const draw = () => { edges.forEach((e, i) => { const a = nodes[e.s], b = nodes[e.t]; eEls[i].setAttribute("x1", a.x.toFixed(1)); eEls[i].setAttribute("y1", a.y.toFixed(1)); eEls[i].setAttribute("x2", b.x.toFixed(1)); eEls[i].setAttribute("y2", b.y.toFixed(1)); }); nodes.forEach((n, i) => nEls[i].setAttribute("transform", `translate(${n.x.toFixed(1)},${n.y.toFixed(1)})`)); };
-  draw();
-  const regionOn = new Set(REG.map(r => r.key)); let sel = null;
-  const visible = n => n.kind === "theme" || n.org.regions.some(k => regionOn.has(k));
-  const applyFilter = () => { nodes.forEach((n, i) => { nEls[i].style.display = visible(n) ? "" : "none"; }); edges.forEach((e, i) => { eEls[i].style.display = visible(nodes[e.s]) ? "" : "none"; }); };
-  $("#netTools").innerHTML = REG.map(r => `<button class="pill" type="button" data-r="${r.key}" aria-pressed="true">${dot(r.key)}${esc(r.name)}</button>`).join("");
-  $("#netTools").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const k = b.dataset.r; if (regionOn.has(k) && regionOn.size > 1) regionOn.delete(k); else regionOn.add(k); $("#netTools").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(regionOn.has(x.dataset.r)))); applyFilter(); if (sel != null) select(sel); });
-  const idle = () => { side.innerHTML = `<h3>${orgs.length} organisations, ${ring.length} themes</h3><p class="small muted">Select a theme to see every group working on it, or a dot to see one group's themes and who it shares them with.</p><p class="small">${REG.map(r => `<span class="reg">${dot(r.key)}${esc(r.name)}</span>`).join(" ")}</p><p class="small muted">${orgs.filter(o => o.regions.length > 1).length} groups are on two or more boards and carry a second ring. ${orgs.filter(o => !o.themes.length).length} float free because their notes give only a name.</p><p class="small muted">Only notes that name an organisation appear here. The rest are in the Sticky notes and Gaps tabs.</p>`; };
-  function select(i) {
-    sel = i; const n = nodes[i]; $("#net").classList.add("focus"); $("#net").classList.toggle("themefocus", n.kind === "theme");
-    const on = new Set([i]); edges.forEach((e, j) => { const hit = e.s === i || e.t === i; eEls[j].classList.toggle("on", hit); if (hit) { on.add(e.s); on.add(e.t); } });
-    nEls.forEach((g, j) => g.classList.toggle("on", on.has(j)));
-    if (n.kind === "theme") {
-      const os = edges.filter(e => e.t === i && visible(nodes[e.s])).map(e => nodes[e.s].org), gn = notes.filter(x => x.themes.includes(n.key) && x.column !== "current_work" && regionOn.has(x.region)).length;
-      side.innerHTML = `<div class="eyebrow">Theme</div><h3>${esc(n.label)}</h3><p class="small">${pl(os.length, "organisation")} in the selected regions work on this, and ${pl(gn, "note")} there name it as a gap.</p><div>${os.map(o => orgChip(o.name)).join("")}</div><button class="btn" type="button" data-go-theme="${n.key}">See the gaps and work</button>`;
-    } else {
-      const o = n.org, share = {};
-      edges.filter(e => e.s === i).forEach(e => edges.filter(f => f.t === e.t && f.s !== i && visible(nodes[f.s])).forEach(f => { const nm = nodes[f.s].org.name; share[nm] = (share[nm] || 0) + 1; }));
-      const top = Object.entries(share).sort((a, b) => b[1] - a[1]).slice(0, 8);
-      side.innerHTML = `<div class="eyebrow">Organisation</div><h3>${esc(o.name)}</h3><div class="regs">${regDots(o.regions)}</div><div>${o.themes.map(k => `<span class="tag">${esc(THEME[k].name)}${o.themes_direct.includes(k) ? "" : " *"}</span>`).join("") || `<span class="small muted">The note gives only the name.</span>`}</div>${top.length ? `<p class="small"><b>Shares the most themes with:</b></p><div>${top.map(([nm]) => orgChip(nm)).join("")}</div>` : ""}<button class="btn" type="button" data-go-org="${esc(o.name)}">Open full card</button>`;
-    }
-  }
-  const clear = () => { sel = null; $("#net").classList.remove("focus", "themefocus"); nEls.forEach(g => g.classList.remove("on")); eEls.forEach(l => l.classList.remove("on")); idle(); };
-  side.addEventListener("click", e => {
-    const c = e.target.closest(".orgchip"); if (c) { const j = idx["o:" + c.dataset.org]; if (j != null) select(j); return; }
-    const t = e.target.closest("[data-go-theme]"); if (t) { go("gaps/" + t.dataset.goTheme, true); return; }
-    const g = e.target.closest("[data-go-org]"); if (g) showOrg(g.dataset.goOrg, true);
-  });
-  const pt = ev => { const r = svg.getBoundingClientRect(); return {x: (ev.clientX - r.left) / r.width * W, y: (ev.clientY - r.top) / r.height * H}; };
-  let drag = null, moved = false;
-  nEls.forEach((g, i) => {
-    g.addEventListener("pointerdown", ev => { drag = i; moved = false; if (nodes[i].kind === "org") { nodes[i].fixed = true; svg.classList.add("dragging"); } g.setPointerCapture(ev.pointerId); ev.stopPropagation(); });
-    g.addEventListener("pointermove", ev => { if (drag !== i || nodes[i].kind === "theme") return; const p = pt(ev); if (Math.abs(p.x - nodes[i].x) + Math.abs(p.y - nodes[i].y) > 2) moved = true; nodes[i].x = p.x; nodes[i].y = p.y; for (let k = 0; k < 2; k++) tick(.08); draw(); });
-    g.addEventListener("pointerup", () => { if (drag === i && !moved) (sel === i ? clear() : select(i)); nodes[i].fixed = nodes[i].kind === "theme"; drag = null; svg.classList.remove("dragging"); });
-    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); sel === i ? clear() : select(i); } if (ev.key === "Escape") clear(); });
-  });
-  svg.addEventListener("pointerdown", ev => { if (!ev.target.closest(".nd")) clear(); });
-  applyFilter(); idle();
-  window.__net = {nodes, edges, select, clear};
+  netRender();
 }
+function netGo(view, key) { if (view === "theme") net.theme = key; if (view === "all") net.theme = null; net.view = view; net.key = key || null; netRender(); const f = $("#netSvg").querySelector(".nd"); }
+function netRender() {
+  const narrow = $("#net").clientWidth < 640;
+  // breadcrumb
+  const cr = [`<button type="button" data-net="all">All themes</button>`];
+  if (net.view !== "all" && net.theme) cr.push(net.view === "theme" ? `<span class="cur">${esc(THEME[net.theme].name)}</span>` : `<button type="button" data-net="theme:${net.theme}">${esc(THEME[net.theme].name)}</button>`);
+  if (net.view === "org") cr.push(`<span class="cur">${esc(net.key)}</span>`);
+  if (net.view === "all") cr[0] = `<span class="cur">All themes</span>`;
+  $("#netCrumbs").innerHTML = cr.join(`<span class="sep" aria-hidden="true">/</span>`);
+  $("#netSvg").style.display = narrow ? "none" : ""; $("#netList").style.display = narrow ? "" : "none";
+  if (net.view === "all") { narrow ? netListAll() : netDrawAll(); netSideAll(); }
+  else if (net.view === "theme") { narrow ? netListTheme() : netDrawTheme(); netSideTheme(); }
+  else { narrow ? netListOrg() : netDrawOrg(); netSideOrg(); }
+}
+const SVGW = 900, SVGH = 600;
+function svgSet(inner, hgt) { const s = $("#netSvg"); s.setAttribute("viewBox", `0 0 ${SVGW} ${hgt || SVGH}`); s.innerHTML = `<g class="layer">${inner}</g>`; }
+function nodeAttrs(target, label) { return `class="nd" data-net="${esc(target)}" tabindex="0" role="button" aria-label="${esc(label)}"`; }
+function regionSplit(os) { return REG.map(r => [r, os.filter(o => o.regions.includes(r.key)).length]).filter(x => x[1]); }
+// level 1: theme bubbles
+function netDrawAll() {
+  const items = themeKeys.map(k => ({k, n: themeOrgs(k).length})).filter(x => x.n).sort((a, b) => b.n - a.n);
+  const max = Math.max(...items.map(x => x.n));
+  items.forEach((it, i) => { it.r = 44 + 34 * Math.sqrt(it.n / max); const a = i * 2.39996, rr = 26 * Math.sqrt(i) * 3.2; it.x = SVGW / 2 + Math.cos(a) * rr * 1.35; it.y = SVGH / 2 + Math.sin(a) * rr * .85; });
+  for (let it = 0; it < 400; it++) { for (let i = 0; i < items.length; i++) for (let j = i + 1; j < items.length; j++) { const a = items[i], b = items[j]; let dx = b.x - a.x, dy = b.y - a.y; const d = Math.hypot(dx, dy) || .01, m = a.r + b.r + 10; if (d < m) { const p = (m - d) / 2; dx /= d; dy /= d; a.x -= dx * p; a.y -= dy * p; b.x += dx * p; b.y += dy * p; } }
+    items.forEach(a => { a.x += (SVGW / 2 - a.x) * .01; a.y += (SVGH / 2 - a.y) * .01; a.x = Math.max(a.r + 6, Math.min(SVGW - a.r - 6, a.x)); a.y = Math.max(a.r + 6, Math.min(SVGH - a.r - 6, a.y)); }); }
+  const minX = Math.min(...items.map(a => a.x - a.r)), maxX = Math.max(...items.map(a => a.x + a.r)), minY = Math.min(...items.map(a => a.y - a.r)), maxY = Math.max(...items.map(a => a.y + a.r));
+  items.forEach(a => { a.x += (SVGW - minX - maxX) / 2; a.y += (SVGH - minY - maxY) / 2; });
+  svgSet(items.map(it => { const lines = wrap(THEME[it.k].name, it.r > 62 ? 16 : 12), fs = it.r > 62 ? 14 : 12, sp = regionSplit(themeOrgs(it.k));
+    const y0 = -((lines.length - 1) * fs * 1.32) / 2 - 8;
+    return `<g ${nodeAttrs("theme:" + it.k, `${THEME[it.k].name}: ${pl(it.n, "group")}`)} transform="translate(${it.x.toFixed(1)},${it.y.toFixed(1)})"><circle class="hit" r="${it.r.toFixed(1)}" fill="var(--marker-soft)" stroke="#b9c3ec" stroke-width="2"/>${lines.map((l, i) => `<text class="tl" text-anchor="middle" y="${(y0 + i * fs * 1.32).toFixed(1)}" style="font-size:${fs}px">${esc(l)}</text>`).join("")}<text class="sub" text-anchor="middle" y="${(y0 + lines.length * fs * 1.32 + 4).toFixed(1)}" style="font-size:12px">${pl(it.n, "group")}</text><g transform="translate(0,${(y0 + lines.length * fs * 1.32 + 20).toFixed(1)})">${sp.map(([r, c], i) => `<g transform="translate(${((i - (sp.length - 1) / 2) * 30).toFixed(1)},0)"><circle r="5" cx="-7" cy="-4" fill="${r.color}"/><text x="1" y="0" style="font-size:11px">${c}</text></g>`).join("")}</g></g>`; }).join(""));
+}
+// level 2: one theme on the left, its groups in tidy columns to the right
+function netDrawTheme() {
+  const k = net.theme, os = themeOrgs(k).sort((a, b) => REG.findIndex(r => r.key === a.regions[0]) - REG.findIndex(r => r.key === b.regions[0]) || a.name.localeCompare(b.name)), n = os.length;
+  const cols = n > 22 ? 2 : 1, per = Math.ceil(n / cols), rowH = 26, hgt = Math.max(300, per * rowH + 60), cx = 120, cy = hgt / 2, colX = cols === 1 ? [430] : [360, 630];
+  let links = "", nodes = "";
+  os.forEach((o, i) => { const c = Math.floor(i / per), r = i % per, colN = Math.min(per, n - c * per), x = colX[c], y = cy + (r - (colN - 1) / 2) * rowH, inf = !o.themes_direct.includes(k), mx = (cx + 70 + x) / 2;
+    links += `<path class="lk${inf ? " inf" : ""}" fill="none" d="M${cx + 70} ${cy} C ${mx} ${cy}, ${mx} ${y.toFixed(1)}, ${x - 9} ${y.toFixed(1)}"/>`;
+    nodes += `<g ${nodeAttrs("org:" + o.name, o.name)} transform="translate(${x},${y.toFixed(1)})">${o.regions.length > 1 ? `<circle r="10.5" fill="none" stroke="${regBy[o.regions[1]].color}" stroke-width="2.5"/>` : ""}<circle class="hit" r="7" fill="${regBy[o.regions[0]].color}" stroke="#fff" stroke-width="1.5"/><text x="13" y="4.5" style="font-size:13px">${esc(short(o.name, cols === 2 ? 32 : 46))}</text></g>`; });
+  const lines = wrap(THEME[k].name, 13);
+  nodes += `<g transform="translate(${cx},${cy})"><circle r="70" fill="var(--marker)"/>${lines.map((l, i) => `<text text-anchor="middle" y="${(i - (lines.length - 1) / 2) * 17 + 5}" style="font-size:14px;fill:#fff;font-family:var(--f-display);font-weight:700">${esc(l)}</text>`).join("")}</g>`;
+  svgSet(links + nodes, hgt);
+}
+// level 3: one group, its themes, and the groups it shares them with
+function peersOf(o) { const share = {}; netOrgs().forEach(x => { if (x === o) return; const s = x.themes.filter(k => o.themes.includes(k)); if (s.length) share[x.name] = s; }); return Object.entries(share).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0])).slice(0, 12); }
+function netDrawOrg() {
+  const o = orgBy[net.key], ts = o.themes, peers = peersOf(o), hgt = Math.max(300, peers.length * 42 + 50, ts.length * 96 + 40), cx = 110, cy = hgt / 2, tx = 360, px = 590;
+  const tp = {}; ts.forEach((k, i) => { tp[k] = {x: tx, y: cy + (i - (ts.length - 1) / 2) * Math.min(110, (hgt - 100) / Math.max(1, ts.length))}; });
+  let links = "", nodes = "";
+  peers.forEach(([nm, sh], i) => { const y = cy + (i - (peers.length - 1) / 2) * Math.min(42, (hgt - 60) / Math.max(1, peers.length)), p = orgBy[nm];
+    sh.forEach(k => { const mx = (tx + 42 + px) / 2; links += `<path class="lk peer" fill="none" d="M${tx + 42} ${tp[k].y.toFixed(1)} C ${mx} ${tp[k].y.toFixed(1)}, ${mx} ${y.toFixed(1)}, ${px - 9} ${y.toFixed(1)}"/>`; });
+    nodes += `<g ${nodeAttrs("org:" + nm, nm + ", shares " + pl(sh.length, "theme"))} transform="translate(${px},${y.toFixed(1)})"><circle class="hit" r="7" fill="${regBy[p.regions[0]].color}" stroke="#fff" stroke-width="1.5"/><text x="13" y="4.5" style="font-size:13px">${esc(short(nm, 34))}</text><text class="sub" x="13" y="19" style="font-size:11px">${pl(sh.length, "shared theme")}</text></g>`; });
+  ts.forEach(k => { const inf = !o.themes_direct.includes(k), mx = (cx + 62 + tx - 42) / 2; links += `<path class="lk${inf ? " inf" : ""}" fill="none" style="stroke-width:2" d="M${cx + 62} ${cy} C ${mx} ${cy}, ${mx} ${tp[k].y.toFixed(1)}, ${tx - 42} ${tp[k].y.toFixed(1)}"/>`;
+    const lines = wrap(THEME[k].name, 13);
+    nodes += `<g ${nodeAttrs("theme:" + k, "Theme: " + THEME[k].name)} transform="translate(${tx},${tp[k].y.toFixed(1)})"><circle class="hit" r="42" fill="var(--marker-soft)" stroke="#b9c3ec" stroke-width="2"/>${lines.map((l, i) => `<text class="tl" text-anchor="middle" y="${(i - (lines.length - 1) / 2) * 13 + 4}" style="font-size:11px">${esc(l)}</text>`).join("")}</g>`; });
+  const lines = wrap(o.name, 14);
+  nodes += `<g transform="translate(${cx},${cy})"><circle r="62" fill="${regBy[o.regions[0]].color}"/>${lines.map((l, i) => `<text text-anchor="middle" y="${(i - (lines.length - 1) / 2) * 15 + 5}" style="font-size:12.5px;fill:#fff;font-family:var(--f-display);font-weight:700">${esc(l)}</text>`).join("")}</g>`;
+  svgSet(links + nodes, hgt);
+}
+// side panel text, plain language
+function netSideAll() {
+  const shown = netOrgs();
+  $("#netSide").innerHTML = `<h3>${pl(themeKeys.filter(k => themeOrgs(k).length).length, "theme")}, ${pl(shown.length, "group")}</h3><p class="small">Each bubble is a theme. Bigger bubbles have more groups working on them. The coloured dots show how many of those groups come from each board.</p><p class="small"><b>Try:</b> select "Fish, shrimp and aquatic animals" to see who works on fish in every region.</p><p class="small muted">${orgs.filter(o => !o.themes.length).length} groups are not shown because their notes give only a name. They are in the Organisations list.</p>`;
+}
+function netSideTheme() {
+  const k = net.theme, os = themeOrgs(k), gaps = notes.filter(n => n.themes.includes(k) && n.column !== "current_work" && net.regions.has(n.region)).length, inf = os.filter(o => !o.themes_direct.includes(k)).length;
+  $("#netSide").innerHTML = `<div class="eyebrow">Theme</div><h3>${esc(THEME[k].name)}</h3><p class="small">${pl(os.length, "group")} on the boards work on this. ${pl(gaps, "note")} name it as a gap.</p><p class="small">Select any group to see what else it works on and who it could talk to.</p><p class="small muted"><svg width="34" height="8" aria-hidden="true"><line x1="0" y1="4" x2="34" y2="4" stroke="#9aa1b4" stroke-width="2"/></svg> written on the group's own note<br><svg width="34" height="8" aria-hidden="true"><line x1="0" y1="4" x2="34" y2="4" stroke="#9aa1b4" stroke-width="2" stroke-dasharray="4 4"/></svg> from its public profile (${inf} of ${os.length})</p><p class="small">${regionSplit(os).map(([r, c]) => `<span class="reg">${dot(r.key)}${esc(r.name)}: ${c}</span>`).join(" ")}</p><button class="btn" type="button" data-go="gaps/${k}">See the gaps and work on this theme</button>`;
+}
+function netSideOrg() {
+  const o = orgBy[net.key], peers = peersOf(o);
+  $("#netSide").innerHTML = `<div class="eyebrow">Group</div><h3>${esc(o.name)}</h3><div class="regs">${regDots(o.regions)}</div><p class="small">Reading left to right: the group, the ${pl(o.themes.length, "theme")} it works on, and ${pl(peers.length, "group")} that share at least one of them. The lines show which themes they share.</p>${peers.length ? `<p class="small"><b>Most in common:</b> ${peers.slice(0, 3).map(([nm, sh]) => `${esc(nm)} (${sh.length})`).join(", ")}.</p>` : ""}<div class="controls"><button class="btn" type="button" data-go="orgs/${encodeURIComponent(o.name)}">Open its full card</button></div>`;
+}
+// phone version: the same three levels as tappable lists
+function netListAll() { $("#netList").innerHTML = `<div class="netlist">${themeKeys.map(k => [k, themeOrgs(k).length]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).map(([k, n]) => `<button class="pill" type="button" data-net="theme:${k}"><span>${esc(THEME[k].name)}</span><span class="n">${pl(n, "group")}</span></button>`).join("")}</div>`; }
+function netListTheme() { const k = net.theme; $("#netList").innerHTML = `<div class="netlist"><p class="small muted">Groups working on ${esc(THEME[k].name)}:</p>${themeOrgs(k).map(o => `<button class="pill" type="button" data-net="org:${esc(o.name)}"><span>${o.regions.map(dot).join("")} ${esc(o.name)}</span><span class="n">${o.themes_direct.includes(k) ? "wrote it" : "profile"}</span></button>`).join("")}</div>`; }
+function netListOrg() { const o = orgBy[net.key]; $("#netList").innerHTML = `<div class="netlist"><p class="small muted">Themes:</p>${o.themes.map(k => `<button class="pill" type="button" data-net="theme:${k}"><span>${esc(THEME[k].name)}</span></button>`).join("")}<p class="small muted">Groups sharing these themes:</p>${peersOf(o).map(([nm, sh]) => `<button class="pill" type="button" data-net="org:${esc(nm)}"><span>${orgBy[nm].regions.map(dot).join("")} ${esc(nm)}</span><span class="n">${pl(sh.length, "theme")}</span></button>`).join("")}</div>`; }
+window.__net = net; window.__netGo = (v, k) => netGo(v, k);
 
 // corrections: in-page form; send by Gmail, Outlook, the mail app, or copy
 const dlg = $("#fixDlg"); let fixRef = "";
