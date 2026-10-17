@@ -1,16 +1,16 @@
-theme_key,theme,work_notes,gap_notes,work_notes_from_note_text_only,gap_notes_from_note_text_only
-corporate,Cage-free and corporate welfare,36,5,14,5
-policy,"Policy, law and government",11,10,8,10
-plantbased,Plant-based food supply,20,8,10,8
-hospitality,Institutions and food service,6,9,6,9
-awareness,Public awareness and education,12,8,9,8
-health,Health and medicine,4,1,4,1
-culture,"Culture, religion and messaging",3,7,1,7
-aquatic,"Fish, shrimp and aquatic animals",12,1,5,1
-neglected,"Ducks, frogs and other overlooked animals",8,3,6,3
-supply,Supply chains and investigations,2,4,2,4
-research,"Research, data and evaluation",8,17,6,17
-talent,"Talent, training and pipeline",8,11,7,11
-cohesion,Movement cohesion and community,11,5,9,5
-funding,Funding and organisational capacity,1,8,1,8
-unstated,"Organisation named, work not described",11,0,11,0
+theme_key,theme,definition,work_notes,gap_notes,work_notes_from_note_text_only,gap_notes_from_note_text_only
+corporate,Cage-free and corporate welfare,"Cage-free pledges, corporate welfare policies, accountability and investor engagement.",36,5,14,5
+policy,"Policy, law and government","Laws, regulation, enforcement and work with governments or legislators.",11,10,8,10
+plantbased,Plant-based food supply,"Plant-based and alternative protein products, their supply, price and acceptance.",20,8,10,8
+hospitality,Institutions and food service,"Meals in schools, hospitals and other institutions, restaurants, hotels and chefs.",6,9,6,9
+awareness,Public awareness and education,"Public awareness, outreach, education and diet-change campaigns.",12,8,9,8
+health,Health and medicine,"Health and medical arguments, doctors and public health research.",4,1,4,1
+culture,"Culture, religion and messaging","Religion, culture, beliefs and how messages are framed.",3,7,1,7
+aquatic,"Fish, shrimp and aquatic animals","Farmed fish, shrimp and other aquatic animals.",12,1,4,1
+neglected,"Ducks, frogs and other overlooked animals","Animals that get little attention elsewhere on the boards: ducks, frogs, buffalo, elephants, transport.",8,3,6,3
+supply,Supply chains and investigations,"Supply chain transparency, traceability, investigations and locating farms.",2,4,2,4
+research,"Research, data and evaluation","Research, data, monitoring, evaluation and learning.",8,17,6,17
+talent,"Talent, training and pipeline","Training, skills, jobs, internships and the pipeline of new advocates.",8,11,7,11
+cohesion,Movement cohesion and community,"Coalitions, community building and coordination between groups.",11,5,9,5
+funding,Funding and organisational capacity,"Money, fundraising, funders and organisational capacity such as legal and admin work.",1,8,1,8
+unstated,"Organisation named, work not described",The note gives an organisation's name but not what it does.,11,0,11,0

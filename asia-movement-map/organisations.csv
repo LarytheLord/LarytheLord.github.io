@@ -1,13 +1,13 @@
 organisation,also_written_as,boards,places,what_the_boards_say,themes,themes_inferred
-Animal Alliance Asia,,East Asia; South Asia,Indonesia; Japan; Nepal; PK; Pakistan; Philippines; Taiwan,"Animal Alliance Asia (Japan) / Animal Alliance Asia (Pakistan, Nepal, Philippines, Taiwan, Indonesia, Japan) / Plant-based potlucks and bake sales (AAA PK)",Plant-based food supply; Public awareness and education; Movement cohesion and community,yes
+Animal Alliance Asia,,East Asia; South Asia,Indonesia; Japan; Nepal; PK; Pakistan; Philippines; Taiwan,"Animal Alliance Asia (Japan) / Animal Alliance Asia (Pakistan, Nepal, Philippines, Taiwan, Indonesia, Japan) / Plant-based potlucks and bake sales (AAA PK)",Movement cohesion and community,yes
 Asia Accountability Initiative (AAI),AAI; Asia Accountability Initiative,East Asia; Southeast Asia,,AAI - Accountability / Asia Accountability Initiative (multi-country),Cage-free and corporate welfare,yes
-Asia Research and Engagement (ARE),ARE,East Asia; Southeast Asia,Japan; SG,"ARE / EuroGroup, ARE, GFP, Katya Burns (+Japan) / ARE - Asia Research and Engagement (shareholder activism) [SG]",Cage-free and corporate welfare; Movement cohesion and community,yes
-Global Food Partners (GFP),GFP; Global Food Partners,East Asia; Southeast Asia,China; Hong Kong; Japan,"GFP (Hong Kong / China) / EuroGroup, ARE, GFP, Katya Burns (+Japan) / Global Food Partners (Elissa Lane) / Global Food Partners (Dawn Neo)",Cage-free and corporate welfare; Movement cohesion and community,yes
+Asia Research and Engagement (ARE),ARE,East Asia; Southeast Asia,Japan; SG,"ARE / EuroGroup, ARE, GFP (+Japan) / ARE - Asia Research and Engagement (shareholder activism) [SG]",Cage-free and corporate welfare; Movement cohesion and community,yes
+Global Food Partners (GFP),GFP; Global Food Partners,East Asia; Southeast Asia,China; Hong Kong; Japan,"GFP (Hong Kong / China) / EuroGroup, ARE, GFP (+Japan) / Global Food Partners (Elissa Lane) / Global Food Partners (Dawn Neo)",Cage-free and corporate welfare; Movement cohesion and community,yes
 Lever Foundation,LEVER,East Asia; Southeast Asia,,LEVER / Lever Foundation,"Cage-free and corporate welfare; Fish, shrimp and aquatic animals",yes
 Mercy For Animals,MFA,East Asia; Southeast Asia,,MFA / Mercy for Animals,Cage-free and corporate welfare,yes
 Planet For All,,East Asia; Southeast Asia,HK; Hong Kong,"Planet For All (Hong Kong) / Planet For All (Wendy Chan), HK","Fish, shrimp and aquatic animals",yes
 21 Hari Vegan,,Southeast Asia,Indonesia,21 Hari Vegan (Indonesia),Plant-based food supply; Public awareness and education,yes
-[...] Animals (farmed animal coalition),,Southeast Asia,,"[...] Animals - farmed animal coalition (Thanh Nguyen), multi-country",Movement cohesion and community,no
+[...] Animals (farmed animal coalition),,Southeast Asia,,"[...] Animals - farmed animal coalition, multi-country",Movement cohesion and community,no
 [...]ery Fund Project,,Southeast Asia,PH,"[...]ery Fund Project, PH",,no
 A[...] Special Project Indonesia (likely Across Species Project Indonesia),A[...] Special Project Indonesia,Southeast Asia,Indonesia,A[...] Spe[cial?] Project Indonesia,"Ducks, frogs and other overlooked animals; Research, data and evaluation",yes
 ACRES,,Southeast Asia,,ACRES (Kalan),,no
@@ -17,7 +17,7 @@ Animal Ask,,Southeast Asia,,Animal Ask (research services) - Pallavi,"Research, 
 Animal Empathy Philippines,,Southeast Asia,PH,"Animal Empathy Philippines (Kate Lupango), PH",,no
 Animal Friends Jogja,,Southeast Asia,Indonesia,Animal Friends Jogja (Indonesia),"Cage-free and corporate welfare; Policy, law and government",yes
 Animal Rights Centre Japan,,East Asia,Japan,Animal Rights Centre Japan,Cage-free and corporate welfare,yes
-Animal Welfare Corporate Partners,,East Asia,Japan,Animal Welfare Corporate Partners - George Ikkeshima (Japan),Cage-free and corporate welfare,no
+Animal Welfare Corporate Partners,,East Asia,Japan,Animal Welfare Corporate Partners (Japan),Cage-free and corporate welfare,no
 Animals Asia,,East Asia,China,Animals Asia (China),,no
 Animals Don't Speak Human,,Southeast Asia,Indonesia,Animals Don't Speak Human (Indonesia),"Cage-free and corporate welfare; Policy, law and government",yes
 Aquatic Initiative for Restoration (AIR),,Southeast Asia,INA,"Aquatic Initiative for Restoration (AIR) - farmed fish[?], Indonesia","Fish, shrimp and aquatic animals",no
@@ -30,7 +30,7 @@ Dharma Voices for Animals,,Southeast Asia,Thailand,Dharma Voices for Animals (Th
 DNJ (not identified),DNJ,South Asia,India,DNJ (India): awareness and education,Public awareness and education,no
 EAST,,East Asia,Taiwan,EAST (Taiwan),"Cage-free and corporate welfare; Policy, law and government; Ducks, frogs and other overlooked animals",yes
 Effective Animal Advocacy Vietnam,,Southeast Asia,VN,"Effective Animal Advocacy Vietnam (Parker Vu), VN",Movement cohesion and community,yes
-Eurogroup for Animals,EuroGroup,East Asia,Japan,"EuroGroup, ARE, GFP, Katya Burns (+Japan)",Cage-free and corporate welfare; Movement cohesion and community,yes
+Eurogroup for Animals,EuroGroup,East Asia,Japan,"EuroGroup, ARE, GFP (+Japan)",Cage-free and corporate welfare; Movement cohesion and community,yes
 Eyes on Asia's Factory Farms,,Southeast Asia,,Eyes on Asia's Factory Farms - SE Asia,Supply chains and investigations,no
 FAI Farms,FAI,East Asia,,FAI,"Cage-free and corporate welfare; Fish, shrimp and aquatic animals",yes
 FRAMED,,Southeast Asia,PH,"FRAMED, PH",,no
@@ -40,7 +40,7 @@ Good Food Institute (GFI),,Southeast Asia,SG,GFI (Good Food Institute) [SG] - al
 Good Growth,,East Asia,,Good Growth,"Research, data and evaluation",yes
 HealthyFarms,,Southeast Asia,VN,"HealthyFarms (Kasia), VN",,no
 Humane World for Animals,,Southeast Asia,,Humane World for Animals,,no
-ICCAW,,East Asia,China,ICCAW: International Committee for Cooperation for Animal Welfare (China),"Fish, shrimp and aquatic animals",no
+ICCAW,,East Asia,China,ICCAW: International Committee for Cooperation for Animal Welfare (China),"Fish, shrimp and aquatic animals",yes
 IFAW,IFAW [?],East Asia,China,IFAW (China),,no
 Indonesia Cage Free Association,,Southeast Asia,Indonesia,Indonesia Cage Free Association (Indonesia),Cage-free and corporate welfare,no
 IQC (Shanghai consultancy),IQC,East Asia,,IQC,"Cage-free and corporate welfare; Fish, shrimp and aquatic animals",yes
@@ -48,7 +48,7 @@ Kampong Senang,,Southeast Asia,SG,Kampong Senang (George Jacobs) [SG] - educatio
 KARA,,East Asia,South Korea,KARA (South Korea),Cage-free and corporate welfare,yes
 Komorebi (Komorebi Pictures),Komorebi,South Asia,India,Komorebi (India): 'Test Subject V' documentary on health / plant-based diet,Public awareness and education; Health and medicine,no
 Korea Animal Welfare Association,,East Asia,South Korea,Korea Animal Welfare Association,Cage-free and corporate welfare,yes
-Luma Institute,,South Asia,India,"Hospitality x plant-based - Educate: training at education level / Hospitality x plant-based - Connect: community of climate-smart chefs / Hospitality x plant-based - Equip: connect chefs with plant-based innovators / Hospitality x plant-based - Enable: training restaurants, audits and awards / Influencer content by industry stalwarts / Strategy for hospitality intervention needs to be data-driven; yet to prove an effective model / Work needs to be done from scratch in Indian hospitality","Plant-based food supply; Institutions and food service; Public awareness and education; Research, data and evaluation; Talent, training and pipeline; Movement cohesion and community",no
+Luma Institute,,South Asia,India,"Hospitality x plant-based - Educate: training at education level / Hospitality x plant-based - Connect: community of climate-smart chefs / Hospitality x plant-based - Equip: connect chefs with plant-based innovators / Hospitality x plant-based - Enable: training restaurants, audits and awards / Influencer content by industry stalwarts / Strategy for hospitality intervention needs to be data-driven; yet to prove an effective model / Work needs to be done from scratch in Indian hospitality","Plant-based food supply; Institutions and food service; Talent, training and pipeline; Movement cohesion and community",no
 Myrias,,East Asia,,Myrias - Yulu and Yaqi,,no
 OJW (possibly One Just World),DJW; OJW,South Asia,IN,Policy change for fish (OJW),"Policy, law and government; Fish, shrimp and aquatic animals",no
 One Veg,,Southeast Asia,PH,"One Veg (Joseph Alcantara), PH",Plant-based food supply,yes
@@ -57,7 +57,7 @@ Paro Institute,,Southeast Asia,PH,"Paro Institute (Pierce Manlangit), PH",Plant-
 Paro Philippines,,Southeast Asia,Philippines,Paro Philippines (Carmel Desiree Pascual),Plant-based food supply,yes
 People for Animals (PFA),PFA; PFA PPF,South Asia,IN; India,Policy change for chickens / PFA PPF (India): making public policy with government for animal welfare standards,"Policy, law and government",no
 Perkumpulan Ayam Sejahtera Indonesia (PASI),,Southeast Asia,Indonesia,"Perkumpulan Ayam Sejahtera Indonesia / PASI Indonesia: laying hen welfare - public engagement, policy changes / PASI, Indonesia","Cage-free and corporate welfare; Policy, law and government; Public awareness and education",no
-Plant Based Treaty (PBT),PBT,South Asia,,Institutional meal replacements / Plant-based training / Religious influence / Lack of funding for meal replacements,"Plant-based food supply; Institutions and food service; Culture, religion and messaging; Funding and organisational capacity",no
+Plant Based Treaty (PBT),PBT,South Asia,,Institutional meal replacements / Plant-based training / Religious influence / Lack of funding for meal replacements,"Plant-based food supply; Institutions and food service; Culture, religion and messaging",no
 Plant-Based Singapore,,Southeast Asia,Singapore,Plant-Based Singapore (Pawan),Plant-based food supply,no
 Ripe for a Purpose,,Southeast Asia,SG,Ripe for a Purpose [SG] - plant-based [?],Plant-based food supply,no
 Sentient Animals Vietnam (SAV),SAV,Southeast Asia,VN; Vietnam,"SAV (Shreya Basu), Vietnam / Scoping study of the Northern Vietnam duck egg and meat industry; consumer surveys on welfare (duck meat and duck eggs) / Corporate engagement: pre-emptive cage-free duck (meat) commitments / Corporate engagement: convincing companies to produce/source Certified Humane duck eggs","Cage-free and corporate welfare; Ducks, frogs and other overlooked animals; Research, data and evaluation",no
@@ -69,7 +69,7 @@ TMM (likely The Mission Motor),TMM,South Asia,,"Capacity building leading to MEL
 Tzu Chi Foundation,,Southeast Asia,,Tzu Chi Foundation (many countries),"Plant-based food supply; Culture, religion and messaging",yes
 Vegeproject Japan,,East Asia,Japan,Vegeproject Japan,Cage-free and corporate welfare; Plant-based food supply,yes
 Vietnam Animal Welfare Watch,,Southeast Asia,Vietnam,Vietnam Animal Welfare Watch,,no
-We The Free (WTF),WTF,South Asia,,"Community building / Street activism / Lack of regional context / videos exposing animal agriculture / Miscommunication about welfare vs rights leads to misrepresentation of animal rights issues / Lack of alt / vegan resources in the region, or their accessibility / affordability / Lack of funding / resources (finance)","Plant-based food supply; Public awareness and education; Culture, religion and messaging; Movement cohesion and community; Funding and organisational capacity",no
+We The Free (WTF),WTF,South Asia,,"Community building / Street activism / Lack of regional context / videos exposing animal agriculture / Miscommunication about welfare vs rights leads to misrepresentation of animal rights issues / Lack of alt / vegan resources in the region, or their accessibility / affordability / Lack of funding / resources (finance)",Public awareness and education; Movement cohesion and community,no
 Welfare Matters,,Southeast Asia,SG,"Welfare Matters (movement building), SG - Wanyi","Talent, training and pipeline; Movement cohesion and community",no
 Xiao Bu Vegan,,East Asia,China,Xiao Bu Vegan (China),Plant-based food supply,yes
 Youth for Just Food Systems,,Southeast Asia,PH,"Youth for Just Food Systems, PH","Public awareness and education; Talent, training and pipeline",yes
